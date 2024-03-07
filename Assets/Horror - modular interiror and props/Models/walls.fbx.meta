@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: 51b97ef392b1e53499e85b61579be290
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 1
+    100002: 2
+    100004: 3
+    100006: 4
+    100008: 5
+    100010: 6
+    100012: 7
+    100014: 8
+    100016: borders
+    100018: borders_1
+    100020: door
+    100022: door_open
+    100024: handle
+    100026: stairs.000
+    100028: stairs_ceiling
+    100030: stairs_floor
+    100032: //RootNode
+    100034: stairs
+    100036: 10
+    400000: 1
+    400002: 2
+    400004: 3
+    400006: 4
+    400008: 5
+    400010: 6
+    400012: 7
+    400014: 8
+    400016: borders
+    400018: borders_1
+    400020: door
+    400022: door_open
+    400024: handle
+    400026: stairs.000
+    400028: stairs_ceiling
+    400030: stairs_floor
+    400032: //RootNode
+    400034: stairs
+    400036: 10
+    2300000: 1
+    2300002: 2
+    2300004: 3
+    2300006: 4
+    2300008: 5
+    2300010: 6
+    2300012: 7
+    2300014: 8
+    2300016: borders
+    2300018: borders_1
+    2300020: door
+    2300022: door_open
+    2300024: handle
+    2300026: stairs.000
+    2300028: stairs_ceiling
+    2300030: stairs_floor
+    2300032: stairs
+    2300034: 10
+    3300000: 1
+    3300002: 2
+    3300004: 3
+    3300006: 4
+    3300008: 5
+    3300010: 6
+    3300012: 7
+    3300014: 8
+    3300016: borders
+    3300018: borders_1
+    3300020: door
+    3300022: door_open
+    3300024: handle
+    3300026: stairs.000
+    3300028: stairs_ceiling
+    3300030: stairs_floor
+    3300032: stairs
+    3300034: 10
+    4300000: stairs.000
+    4300002: borders_1
+    4300004: stairs_ceiling
+    4300006: stairs_floor
+    4300008: 8
+    4300010: 6
+    4300012: 3
+    4300014: 2
+    4300016: 5
+    4300018: 4
+    4300020: 7
+    4300022: borders
+    4300024: handle
+    4300026: door_open
+    4300028: 1
+    4300030: door
+    4300032: stairs
+    4300034: 10
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ceiling
+    second: {fileID: 2100000, guid: cfd4442816024b5429a42c23f4109c27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door
+    second: {fileID: 2100000, guid: ffae7e5426af8b647b8a1482517b8dca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor
+    second: {fileID: 2100000, guid: 3a14e9a78117fd7488772616c1c950c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: 0c8e0a4b5e8238743b03c6e74b1c6282, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall
+    second: {fileID: 2100000, guid: a5f66ebd5e4415f47beefe9d620d7497, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: a4501c3b099b041479591c3c2d3fa78e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
