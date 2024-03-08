@@ -4,10 +4,17 @@ using UnityEngine;
 // 해당 아이템의 사용 유무 확인
 public class ItemPickUp : MonoBehaviour
 {
+    public enum KeyKind
+    {
+        under,
+        whieDoor,
+    }
     public Item item;
-
     private bool isUsed = false;
+    [SerializeField]
+    private KeyKind keyKind;
     private bool isHolded = false;
+
     private void Update()
     {
         if (isUsed)
@@ -19,7 +26,7 @@ public class ItemPickUp : MonoBehaviour
     {
         return isUsed;
     }
-    public void SetIsUsed(bool value) 
+    public void SetIsUsed(bool value)
     { isUsed = value; }
     public bool GetIsHolded()
     {
@@ -27,4 +34,9 @@ public class ItemPickUp : MonoBehaviour
     }
     public void SetIsHolded(bool value)
     { isHolded = value; }
+    public KeyKind GetKeyKind()
+    {
+        return keyKind;
+    }
+
 }

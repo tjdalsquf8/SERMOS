@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
                     GridDoor griddoor = hit.collider.GetComponent<GridDoor>();
                     try
                     {
-                        GameObject firstChild = _rightHand.transform.GetChild(0).gameObject;
+                        GameObject firstChild = _rightHand.transform.GetChild(0).gameObject != null ? _rightHand.transform.GetChild(0).gameObject : null; ;
                         if (firstChild != null && firstChild.CompareTag("key"))
                         {
                             ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
@@ -272,7 +272,7 @@ public class PlayerController : MonoBehaviour
 */
             else
             {
-                if (_rightHand.transform.childCount > 0)
+                if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                 {
                     DropObject();
                 }
@@ -288,7 +288,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             UiController.UiDelete();
-            UiController.DisplayMessage("", false);
         }
     }
     public void PlayFootSound()

@@ -12,6 +12,7 @@ TagManager:
   - safebox
   - concretedoor
   - paper
+  - griddoor
   layers:
   - Default
   - TransparentFX
