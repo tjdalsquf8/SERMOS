@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip[] audioClipWalk;
 
+
     private KeyCode keyCodeRun = KeyCode.LeftShift;
     private KeyCode keyCodeJump = KeyCode.Space;
     private KeyCode keyCodeInter = KeyCode.F;
@@ -26,11 +29,8 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     //private PlayerAnimatorController animator;
     private Animator _animator;
-    public List<GameObject> UiImage = new List<GameObject>();
 
-
-
-
+    private UiController UiController;
     private void Awake()
     {
         Cursor.visible = false;
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
+        UiController = GetComponent<UiController>();
     }
 
     // Update is called once per frame
@@ -117,9 +118,11 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10))
         {
-            if (Input.GetKeyDown(keyCodeInter))
+            // DisplayMessage("Open Door");
+            if (hit.collider.CompareTag("door"))
             {
-                if (hit.collider.CompareTag("door"))
+                UiController.DisplayMessage("Open the Door", true);
+                if (Input.GetKeyDown(keyCodeInter))
                 {
                     Door door = hit.collider.gameObject.GetComponent<Door>();
                     float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
@@ -137,11 +140,17 @@ public class PlayerController : MonoBehaviour
                     {
                         door.SetParams(-1);
                     }
-
                 }
-                else if (hit.collider.CompareTag("box"))
+            }
+            else if (hit.collider.CompareTag("box"))
+            {
+                Box box = null;
+                if (box == null)
                 {
-                    Box box = hit.collider.GetComponent<Box>();
+                    box = hit.collider.GetComponent<Box>();
+                }
+                if (Input.GetKeyDown(keyCodeInter))
+                {
                     if (box.AniGetBool())
                     {
                         box.AniSetBool(false);
@@ -151,9 +160,15 @@ public class PlayerController : MonoBehaviour
                         box.AniSetBool(true);
                     }
                 }
-                else if (hit.collider.CompareTag("table"))
+                if (box != null && !box.AniGetBool()) UiController.DisplayMessage("Open the box", true);
+                else if (box != null && box.AniGetBool()) UiController.DisplayMessage("Close the box", true);
+            }
+            else if (hit.collider.CompareTag("table"))
+            {
+                Table table = null;
+                if (table == null) table = hit.collider.GetComponent<Table>();
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    Table table = hit.collider.GetComponent<Table>();
                     if (table.AniGetBool())
                     {
                         table.AniSetBool(false);
@@ -163,7 +178,13 @@ public class PlayerController : MonoBehaviour
                         table.AniSetBool(true);
                     }
                 }
-                else if (hit.collider.CompareTag("safebox"))
+                if (table != null && !table.AniGetBool()) UiController.DisplayMessage("Open the drawer", true);
+                else if (table != null && table.AniGetBool()) UiController.DisplayMessage("Close the drawer", true);
+            }
+            else if (hit.collider.CompareTag("safebox"))
+            {
+                UiController.DisplayMessage("Open the safeBox", true);
+                if (Input.GetKeyDown(keyCodeInter))
                 {
                     SafeBox safebox = hit.collider.GetComponent<SafeBox>();
                     if (safebox.AniGetBool())
@@ -175,7 +196,11 @@ public class PlayerController : MonoBehaviour
                         safebox.AniSetBool(true);
                     }
                 }
-                else if (hit.collider.CompareTag("concretedoor"))
+            }
+            else if (hit.collider.CompareTag("concretedoor"))
+            {
+                UiController.DisplayMessage("Open the concreteDoor", true);
+                if (Input.GetKeyDown(keyCodeInter))
                 {
                     ConcreteDoor concretedoor = hit.collider.GetComponent<ConcreteDoor>();
                     if (concretedoor.AniGetBool())
@@ -187,17 +212,41 @@ public class PlayerController : MonoBehaviour
                         concretedoor.AniGetBool(true);
                     }
                 }
-                else if (hit.collider.CompareTag("paper"))
+            }
+            else if (hit.collider.CompareTag("griddoor"))
+            {
+                UiController.DisplayMessage("Open the Door", true);
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    Paper paper = hit.collider.GetComponent<Paper>();
-                    if (paper != null)
+                    GridDoor griddoor = hit.collider.GetComponent<GridDoor>();
+                    try
                     {
-                        Debug.Log("ui생성");
-                        paper.Interact();
+                        GameObject firstChild = _rightHand.transform.GetChild(0).gameObject;
+                        if (firstChild != null && firstChild.CompareTag("key"))
+                        {
+                            ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
+                            if (key.GetKeyKind() == ItemPickUp.KeyKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
+                            {
+                                griddoor.AniSetBool(true);
+                                key.SetIsUsed(true);
+                                key.SetIsHolded(false);
+                            }
+                        }
+
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        if (griddoor.AniGetBool())
+                        {
+                            griddoor.AniSetBool(false);
+                        }
                     }
                 }
-
-                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
+            }
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
+            {
+                UiController.DisplayMessage("Pick Up", true);
+                if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
@@ -209,18 +258,27 @@ public class PlayerController : MonoBehaviour
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
                         hitItemPickUp.SetIsHolded(true);
                     }
-
                 }
-
-                else
+            }
+            /*else if (hit.collider.CompareTag("paper"))
+            {
+                Paper paper = hit.collider.GetComponent<Paper>();
+                if (paper != null)
                 {
-                    if (_rightHand.transform.childCount > 0)
-                    {
-                        DropObject();
-                    }
-
-                    UiDelete();
+                    Debug.Log("ui생성");
+                    paper.Interact();
                 }
+            }
+*/
+            else
+            {
+                if (_rightHand.transform.childCount > 0)
+                {
+                    DropObject();
+                }
+
+                UiController.UiDelete();
+
             }
         }
         else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
@@ -229,22 +287,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            UiDelete();
-        }
-    }
-
-
-    public void UiDelete()
-    {
-        if (Input.GetKeyDown(keyCodeInter))
-        {
-            for (int i = 0; i < UiImage.Count; i++)
-            {
-                if (UiImage[i].activeSelf)
-                {
-                    UiImage[i].SetActive(false);
-                }
-            }
+            UiController.UiDelete();
+            UiController.DisplayMessage("", false);
         }
     }
     public void PlayFootSound()
@@ -261,4 +305,6 @@ public class PlayerController : MonoBehaviour
         firstChild.GetComponent<Rigidbody>().useGravity = true;
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
+
+
 }
