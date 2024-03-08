@@ -611,7 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afae4c7a829245f42b8c1241a3877692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openSound: {fileID: 8300000, guid: 066bf003bc5ef7b4faff06b03694295f, type: 3}
+  _openSound1: {fileID: 8300000, guid: 066bf003bc5ef7b4faff06b03694295f, type: 3}
+  _openSound2: {fileID: 8300000, guid: 8357411b367438a45a5132e51ef7a97e, type: 3}
 --- !u!95 &44850810
 Animator:
   serializedVersion: 5
@@ -18985,7 +18986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 423.2
+      value: 431.59
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18993,7 +18994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.4
+      value: 8.47
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalRotation.w
