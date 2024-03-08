@@ -6,22 +6,18 @@ public class GridDoor : MonoBehaviour
 {
     private Animator _animator;
     [SerializeField]
-    private AudioClip _openSound1;
-    [SerializeField]
-    private AudioClip _openSound2;
+    private AudioClip _openSound;
     private AudioSource audio;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
-
     }
 
     private void Start()
     {
-        audio.clip = _openSound1;
-        audio.clip = _openSound2;
+        audio.clip = _openSound;
     }
 
     // Update is called once per frame
