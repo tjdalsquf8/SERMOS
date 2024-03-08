@@ -262,27 +262,30 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("paper"))
                 {
+                    UiController.DisplayMessage("Look", true);
                     Paper paper = hit.collider.GetComponent<Paper>();
                     if (paper != null && Input.GetKeyDown(keyCodeInter))
                     {
                         paper.Interact();
                     }
                 }
-                else
+                else // raycast find object but, tag is Untagged
                 {
                     if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                     {
                         DropObject();
                     }
+                    UiController.DisplayMessage("", false);
                     UiController.UiDelete();
                 }
         }
-        else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
+        else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
         {
             DropObject();
         }
         else
         {
+            UiController.DisplayMessage("", false);
             UiController.UiDelete();
         }
     }
