@@ -41,7 +41,6 @@ public class Door : MonoBehaviour
 
                 if (_cousionanimator != null)
                 {
-                    Debug.Log("¹ÎÁö");
                     _cousionanimator.SetBool("isfall", true);
                 }
             }

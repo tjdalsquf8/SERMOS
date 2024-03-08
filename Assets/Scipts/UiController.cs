@@ -12,6 +12,7 @@ public class UiController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI playerUITextMeshPro;
     public List<GameObject> UiImage = new List<GameObject>();
+
     private void OnEnable()
     {
         playerUI.SetActive(false);
