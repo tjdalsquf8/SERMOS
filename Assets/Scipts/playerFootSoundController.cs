@@ -38,10 +38,6 @@ public class playerFootSoundController : MonoBehaviour
         _audio.Play();
 
     }
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("wood") ){
-             _audio.clip = woodFloorSound[UnityEngine.Random.Range(0, 3)];
-        }
-    }
+   
 }
+// enter 에서 발소리 리스트를 바꿈, up
