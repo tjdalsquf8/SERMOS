@@ -304,5 +304,8 @@ public class PlayerController : MonoBehaviour
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }
