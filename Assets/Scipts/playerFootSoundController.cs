@@ -6,38 +6,33 @@ public class playerFootSoundController : MonoBehaviour
 {
     [Header("Wood floor Audio Sounds")]
     [SerializeField]
-    private AudioClip[] woodFloorSound;
+    private  AudioClip[] woodFloorSound;
 
-    [Header("Concreay floow Audio Sound")]
+    [Header("Concreat floor Audio Sound")]
     [SerializeField]
-    private AudioClip[] concreateFloorSound;
+    private  AudioClip[] concreateFloorSound;
 
-    private AudioSource _audio;
-    private Animator _ani;
+    private AudioClip[] usingSounds;
+    private  AudioSource _audio;
+    private  Animator _ani;
+
     private void Awake()
     {
         _audio = GetComponent<AudioSource>();
         _ani = GameObject.Find("Player").GetComponent<Animator>();
-    }
-    void Start()
-    {
-        
-    }
-    class soundPlay
-    {
-       
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public static void PlayFootSound(ref AudioClip[] audioClips, ref AudioSource _audio)
-    {
-        
-        _audio.Play();
-
+        usingSounds = concreateFloorSound;
     }
    
+    
+    public  void PlayFootSound()
+    {
+            _audio.clip = usingSounds[Random.Range(0, 3)];
+            _audio.Play();
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("woodFloor"))  usingSounds = woodFloorSound; 
+        else if(other.CompareTag("concreatFloor")) usingSounds = concreateFloorSound; 
+    }
 }
 // enter 에서 발소리 리스트를 바꿈, up

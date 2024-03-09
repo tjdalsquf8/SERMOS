@@ -12,12 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _rightHand;
 
-    [Header("Audio clips")]
-    [SerializeField]
-    private AudioClip audioClipRun;
-    [SerializeField]
-    private AudioClip[] audioClipWalk;
-
+   
 
     private KeyCode keyCodeRun = KeyCode.LeftShift;
     private KeyCode keyCodeJump = KeyCode.Space;
@@ -289,12 +284,7 @@ public class PlayerController : MonoBehaviour
             UiController.UiDelete();
         }
     }
-    public void PlayFootSound()
-    {
-        audioSource.clip = audioClipWalk[UnityEngine.Random.Range(0, 3)];
-        audioSource.Play();
-
-    }
+   
     public void DropObject() // drop first object in _rightHand 
     {
         Transform firstChild = _rightHand.transform.GetChild(0);

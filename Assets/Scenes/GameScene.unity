@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029087225, g: 0.02989758, b: 0.029896658, a: 1}
+  m_IndirectSpecularColor: {r: 0.029087335, g: 0.0298977, b: 0.029896773, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16743,6 +16743,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3cd173ae4543f8745ac463237321e8db, type: 2}
+    - target: {fileID: -5711052370896006010, guid: 3806c8bf199aabf40a0a0e7d909d0287, type: 3}
+      propertyPath: m_TagString
+      value: concreatFloor
+      objectReference: {fileID: 0}
     - target: {fileID: -5057147344372426207, guid: 3806c8bf199aabf40a0a0e7d909d0287, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -20930,6 +20934,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       insertIndex: -1
       addedObject: {fileID: 844791744}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 6793770d179eb204eac183a49f46f430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 844791746}
   m_SourcePrefab: {fileID: 100100000, guid: 6793770d179eb204eac183a49f46f430, type: 3}
 --- !u!1 &844791731 stripped
 GameObject:
@@ -20961,11 +20968,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightHand: {fileID: 1731957982}
-  audioClipRun: {fileID: 0}
-  audioClipWalk:
-  - {fileID: 8300000, guid: 3c8175564f6be4e90920cb0717656249, type: 3}
-  - {fileID: 8300000, guid: 6f8a65df16d714a0e8c46972ec2f1fea, type: 3}
-  - {fileID: 8300000, guid: a5f9828a3b0c04882874684ade2bddbd, type: 3}
 --- !u!114 &844791734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21153,6 +21155,26 @@ MonoBehaviour:
   UiImage:
   - {fileID: 525681033}
   - {fileID: 1240063867}
+--- !u!114 &844791746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844791731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a4c6208662ea4478c3b38f082162a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodFloorSound:
+  - {fileID: 8300000, guid: a5f9828a3b0c04882874684ade2bddbd, type: 3}
+  - {fileID: 8300000, guid: e46faab01f8844b7b89e6a50c945ac42, type: 3}
+  - {fileID: 8300000, guid: 101184aa5ac094ad4ad8938b443f2f68, type: 3}
+  concreateFloorSound:
+  - {fileID: 8300000, guid: 368e6183c37ee4295927229e44a75356, type: 3}
+  - {fileID: 8300000, guid: 71ae254c313204abb9905c0a3586c9c0, type: 3}
+  - {fileID: 8300000, guid: 00c61c8c11ada4940b6adc144d2a3832, type: 3}
 --- !u!1001 &855211343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22303,7 +22325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1685343955664076, guid: 72653085a6b827f48b10b434c7972f1c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4795266759639050, guid: 72653085a6b827f48b10b434c7972f1c, type: 3}
       propertyPath: m_LocalScale.x
@@ -24265,6 +24287,10 @@ PrefabInstance:
     - target: {fileID: 1967513747706110, guid: 457f881c570d79b41977043b601a0b45, type: 3}
       propertyPath: m_Name
       value: 6 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967513747706110, guid: 457f881c570d79b41977043b601a0b45, type: 3}
+      propertyPath: m_TagString
+      value: woodFloor
       objectReference: {fileID: 0}
     - target: {fileID: 1967513747706110, guid: 457f881c570d79b41977043b601a0b45, type: 3}
       propertyPath: m_StaticEditorFlags

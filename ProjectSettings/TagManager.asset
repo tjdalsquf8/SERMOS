@@ -13,6 +13,8 @@ TagManager:
   - concretedoor
   - paper
   - griddoor
+  - concreatFloor
+  - woodFloor
   layers:
   - Default
   - TransparentFX
