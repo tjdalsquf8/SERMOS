@@ -611,8 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afae4c7a829245f42b8c1241a3877692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _openSound1: {fileID: 8300000, guid: 066bf003bc5ef7b4faff06b03694295f, type: 3}
-  _openSound2: {fileID: 8300000, guid: 8357411b367438a45a5132e51ef7a97e, type: 3}
+  _openSound: {fileID: 8300000, guid: 066bf003bc5ef7b4faff06b03694295f, type: 3}
 --- !u!95 &44850810
 Animator:
   serializedVersion: 5
@@ -18987,10 +18986,14 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 431.59
 =======
       value: 419.92
 >>>>>>> b01fbd0eb5959a28fce2cfd897fc97b2d5a9bad1
+=======
+      value: 423.2
+>>>>>>> f57ebf852f5c4fec15201eebba622b68dc0d9c01
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18999,10 +19002,14 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalPosition.z
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 8.47
 =======
       value: 33.88
 >>>>>>> b01fbd0eb5959a28fce2cfd897fc97b2d5a9bad1
+=======
+      value: 38.4
+>>>>>>> f57ebf852f5c4fec15201eebba622b68dc0d9c01
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6793770d179eb204eac183a49f46f430, type: 3}
       propertyPath: m_LocalRotation.w
