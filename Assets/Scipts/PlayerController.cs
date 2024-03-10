@@ -179,9 +179,10 @@ public class PlayerController : MonoBehaviour
                 else if (hit.collider.CompareTag("safebox"))
                 {
                     UiController.DisplayMessage("Open the safeBox", true);
-                    if (Input.GetKeyDown(keyCodeInter))
+                SafeBox safebox = null;
+                if(safebox == null) safebox = hit.collider.GetComponent<SafeBox>();
+                if (Input.GetKeyDown(keyCodeInter))
                     {
-                        SafeBox safebox = hit.collider.GetComponent<SafeBox>();
                         if (safebox.AniGetBool())
                         {
                             safebox.AniSetBool(false);
@@ -191,31 +192,35 @@ public class PlayerController : MonoBehaviour
                             safebox.AniSetBool(true);
                         }
                     }
-                }
+                if (safebox != null && !safebox.AniGetBool()) UiController.DisplayMessage("Open the safebox", true);
+                else if (safebox != null && safebox.AniGetBool()) UiController.DisplayMessage("Close the safebox", true);
+            }
                 else if (hit.collider.CompareTag("concretedoor"))
                 {
                     UiController.DisplayMessage("Open the concreteDoor", true);
+                    ConcreteDoor concreatdoor = null;
+                    if(concreatdoor == null) concreatdoor = hit.collider.GetComponent<ConcreteDoor>();
+
                     if (Input.GetKeyDown(keyCodeInter))
                     {
-                        ConcreteDoor concretedoor = hit.collider.GetComponent<ConcreteDoor>();
-                        if (concretedoor.AniGetBool())
+                        if (concreatdoor.AniGetBool())
                         {
-                            concretedoor.AniGetBool(false);
+                            concreatdoor.AniGetBool(false);
                         }
                         else
                         {
-                            concretedoor.AniGetBool(true);
+                            concreatdoor.AniGetBool(true);
                         }
                     }
-                }
+                if (concreatdoor != null && !concreatdoor.AniGetBool()) UiController.DisplayMessage("Open the concreatdoor", true);
+                else if (concreatdoor != null && concreatdoor.AniGetBool()) UiController.DisplayMessage("Close the concreatdoor", true);
+            }
                 else if (hit.collider.CompareTag("griddoor"))
                 {
                     UiController.DisplayMessage("Open the Door", true);
                     if (Input.GetKeyDown(keyCodeInter))
                     {
                         GridDoor griddoor = hit.collider.GetComponent<GridDoor>();
-                        try
-                        {
                             GameObject firstChild = _rightHand.transform.GetChild(0).gameObject != null ? _rightHand.transform.GetChild(0).gameObject : null; ;
                             if (firstChild != null && firstChild.CompareTag("key"))
                             {
@@ -228,14 +233,10 @@ public class PlayerController : MonoBehaviour
                                 }
                             }
 
-                        }
-                        catch (IndexOutOfRangeException e)
-                        {
                             if (griddoor.AniGetBool())
                             {
                                 griddoor.AniSetBool(false);
                             }
-                        }
                     }
                 }
                 else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
