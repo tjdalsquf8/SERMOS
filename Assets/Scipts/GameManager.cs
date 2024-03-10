@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,10 +8,6 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject enemy; // pirest
-
-    [Header("SystemMessage UI")]
-    [SerializeField]
-    private TextMeshPro text;
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;
@@ -37,5 +32,4 @@ public class GameManager : MonoBehaviour
             _enemyAudio.enabled = true;
         }
     }
-
 }
