@@ -1432,7 +1432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1290369353484884, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_Name
-      value: door (6)
+      value: StartDoor
       objectReference: {fileID: 0}
     - target: {fileID: 1290369353484884, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
@@ -2986,7 +2986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1981346879581610, guid: 1f1f190711d75494d95aebe3bbb07676, type: 3}
       propertyPath: m_Name
-      value: 3 (1)
+      value: StartRoom
       objectReference: {fileID: 0}
     - target: {fileID: 1981346879581610, guid: 1f1f190711d75494d95aebe3bbb07676, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4627,7 +4627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 844791731}
   enemy: {fileID: 362843953}
-  text: {fileID: 0}
 --- !u!4 &388759172
 Transform:
   m_ObjectHideFlags: 0
@@ -28143,7 +28142,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f03a3a78965872b49b39f90820a87ecc, type: 2}
     - target: {fileID: 919132149155446097, guid: 6774189569af7b54dbe472d2db918511, type: 3}
       propertyPath: m_Name
-      value: key (1)
+      value: griddoorkey
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6774189569af7b54dbe472d2db918511, type: 3}
       propertyPath: m_Layer
@@ -30306,23 +30305,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4560391095722074, guid: 99d1bfd6c76ccbe428011a3bf0b93f8e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.73466194
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4560391095722074, guid: 99d1bfd6c76ccbe428011a3bf0b93f8e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4560391095722074, guid: 99d1bfd6c76ccbe428011a3bf0b93f8e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6784334
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4560391095722074, guid: 99d1bfd6c76ccbe428011a3bf0b93f8e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4560391095722074, guid: 99d1bfd6c76ccbe428011a3bf0b93f8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -85.443
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
