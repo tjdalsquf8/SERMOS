@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
     public Animator _cousionanimator;
     
 
-    private AudioSource audio;
+    private  AudioSource audio;
     private void Awake()
     {
         _animator = GetComponent<Animator>();

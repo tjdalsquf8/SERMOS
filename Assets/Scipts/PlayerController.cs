@@ -218,26 +218,26 @@ public class PlayerController : MonoBehaviour
                 else if (hit.collider.CompareTag("griddoor"))
                 {
                     UiController.DisplayMessage("Open the Door", true);
-                    if (Input.GetKeyDown(keyCodeInter))
-                    {
-                        GridDoor griddoor = hit.collider.GetComponent<GridDoor>();
-                            GameObject firstChild = _rightHand.transform.GetChild(0).gameObject != null ? _rightHand.transform.GetChild(0).gameObject : null; ;
-                            if (firstChild != null && firstChild.CompareTag("key"))
-                            {
-                                ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
-                                if (key.GetKeyKind() == ItemPickUp.KeyKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
-                                {
-                                    griddoor.AniSetBool(true);
-                                    key.SetIsUsed(true);
-                                    key.SetIsHolded(false);
-                                }
-                            }
+                    GridDoor griddoor = null;
+                    if(griddoor == null) griddoor = hit.collider.GetComponent<GridDoor>();
 
-                            if (griddoor.AniGetBool())
-                            {
-                                griddoor.AniSetBool(false);
-                            }
+                if (Input.GetKeyDown(keyCodeInter))
+                {
+                    GameObject firstChild = null;
+                    if (firstChild == null && _rightHand.transform.childCount > 0) firstChild = _rightHand.transform.GetChild(0).gameObject;
+                   // GameObject firstChild = _rightHand.transform.GetChild(0).gameObject != null ? _rightHand.transform.GetChild(0).gameObject : null; ;
+                    if (firstChild != null && firstChild.CompareTag("key"))
+                    {
+                        ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
+                        if (key.GetKeyKind() == ItemPickUp.KeyKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
+                        {
+                            griddoor.AniSetBool(true);
+                            key.SetIsUsed(true);
+                            key.SetIsHolded(false);
+                        }
                     }
+                    else if (firstChild == null) griddoor.AniSetBool(false);
+                }
                 }
                 else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
                 {

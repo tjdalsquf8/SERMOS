@@ -4,7 +4,7 @@ using UnityEngine;
 // 해당 아이템의 사용 유무 확인
 public class ItemPickUp : MonoBehaviour
 {
-    public enum KeyKind
+    public enum KeyKind : short // enum inherit struct value, ( int, float ... )
     {
         under,
         whieDoor,
