@@ -7,28 +7,35 @@ public class Table : MonoBehaviour
     Animator _animator;
     [SerializeField]
     private AudioClip _openSound;
-    private AudioSource audio;
+    private  AudioSource _audio;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
+        _audio = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        audio.clip = _openSound;
+        _audio.clip = _openSound;
     }
     // Update is called once per frame
 
 
     public void AniSetBool(bool isOpen)
     {
-        audio.Play();
+        
+        StartCoroutine(PlayGridDoorSounds());
         _animator.SetBool("isOpen", isOpen);
+        StopCoroutine(PlayGridDoorSounds());
     }
     public bool AniGetBool() {
-        audio.Play();
         return _animator.GetBool("isOpen"); 
+
+    }
+    private IEnumerator PlayGridDoorSounds()
+    {
+        _audio.Play();
+        yield return new WaitForSeconds(_audio.clip.length);
     }
 }
