@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using TMPro;
 public class FadeEffect : MonoBehaviour
 {
     private float fadeTime = 1.0f;

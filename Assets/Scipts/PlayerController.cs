@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _rightHand;
 
-   
+    [SerializeField]
+    private UiController UiController;
+
+    private bool coroutineRunning = false;
 
     private KeyCode keyCodeRun = KeyCode.LeftShift;
     private KeyCode keyCodeJump = KeyCode.Space;
@@ -24,8 +27,8 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     //private PlayerAnimatorController animator;
     private Animator _animator;
-
-    private UiController UiController;
+    
+    
     private void Awake()
     {
         Cursor.visible = false;
@@ -37,7 +40,6 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
-        UiController = GetComponent<UiController>();
     }
 
     // Update is called once per frame
@@ -113,10 +115,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10))
         {
-            
                 if (hit.collider.CompareTag("door"))
                 {
-                    UiController.DisplayMessage("Open the Door", true);
+                    //string message, UiState state, bool isCasted = false
+                    //StartCoroutine(UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true));
                     if (Input.GetKeyDown(keyCodeInter))
                     {
                         Door door = hit.collider.gameObject.GetComponent<Door>();
@@ -139,6 +141,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("box"))
                 {
+                 
                     Box box = null;
                     if (box == null)
                     {
@@ -155,8 +158,8 @@ public class PlayerController : MonoBehaviour
                             box.AniSetBool(true);
                         }
                     }
-                    if (box != null && !box.AniGetBool()) UiController.DisplayMessage("Open the box", true);
-                    else if (box != null && box.AniGetBool()) UiController.DisplayMessage("Close the box", true);
+                   // if (box != null && !box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Open the box", UiController.UiState.PlayerUi, true));
+                   // else if (box != null && box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Close the box", UiController.UiState.PlayerUi, true));
                 }
                 else if (hit.collider.CompareTag("table"))
                 {
@@ -173,15 +176,21 @@ public class PlayerController : MonoBehaviour
                             table.AniSetBool(true);
                         }
                     }
-                    if (table != null && !table.AniGetBool()) UiController.DisplayMessage("Open the drawer", true);
-                    else if (table != null && table.AniGetBool()) UiController.DisplayMessage("Close the drawer", true);
+                if (table != null && !table.AniGetBool())
+                {
+                    UiController.FadeInOut("Open the drawer", UiController.UiState.PlayerUi, true);
+                }
+                else if (table != null && table.AniGetBool())
+                {
+                    UiController.FadeInOut("Close the drawer", UiController.UiState.PlayerUi, true);
+                }
                 }
                 else if (hit.collider.CompareTag("safebox"))
                 {
-                    UiController.DisplayMessage("Open the safeBox", true);
-                SafeBox safebox = null;
-                if(safebox == null) safebox = hit.collider.GetComponent<SafeBox>();
-                if (Input.GetKeyDown(keyCodeInter))
+                    UiController.FadeInOut("Open the safeBox", UiController.UiState.PlayerUi, true);
+                    SafeBox safebox = null;
+                    if(safebox == null) safebox = hit.collider.GetComponent<SafeBox>();
+                    if (Input.GetKeyDown(keyCodeInter))
                     {
                         if (safebox.AniGetBool())
                         {
@@ -192,12 +201,12 @@ public class PlayerController : MonoBehaviour
                             safebox.AniSetBool(true);
                         }
                     }
-                if (safebox != null && !safebox.AniGetBool()) UiController.DisplayMessage("Open the safebox", true);
-                else if (safebox != null && safebox.AniGetBool()) UiController.DisplayMessage("Close the safebox", true);
+                if (safebox != null && !safebox.AniGetBool()) UiController.FadeInOut("Open the safebox", UiController.UiState.PlayerUi, true);
+                else if (safebox != null && safebox.AniGetBool()) UiController.FadeInOut("Close the safebox", UiController.UiState.PlayerUi, true);
             }
                 else if (hit.collider.CompareTag("concretedoor"))
                 {
-                    UiController.DisplayMessage("Open the concreteDoor", true);
+                    UiController.FadeInOut("Open the concreteDoor", UiController.UiState.PlayerUi, true);
                     ConcreteDoor concreatdoor = null;
                     if(concreatdoor == null) concreatdoor = hit.collider.GetComponent<ConcreteDoor>();
 
@@ -212,12 +221,12 @@ public class PlayerController : MonoBehaviour
                             concreatdoor.AniGetBool(true);
                         }
                     }
-                if (concreatdoor != null && !concreatdoor.AniGetBool()) UiController.DisplayMessage("Open the concreatdoor", true);
-                else if (concreatdoor != null && concreatdoor.AniGetBool()) UiController.DisplayMessage("Close the concreatdoor", true);
+                if (concreatdoor != null && !concreatdoor.AniGetBool()) UiController.FadeInOut("Open the concreatdoor", UiController.UiState.PlayerUi, true);
+                else if (concreatdoor != null && concreatdoor.AniGetBool()) UiController.FadeInOut("Close the concreatdoor", UiController.UiState.PlayerUi, true);
             }
                 else if (hit.collider.CompareTag("griddoor"))
                 {
-                    UiController.DisplayMessage("Open the Door", true);
+                    UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true);
                     GridDoor griddoor = null;
                     if(griddoor == null) griddoor = hit.collider.GetComponent<GridDoor>();
 
@@ -241,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
                 {
-                    UiController.DisplayMessage("Pick Up", true);
+                    UiController.FadeInOut("Pick Up", UiController.UiState.PlayerUi, true);
                     if (Input.GetKeyDown(keyCodeInter))
                     {
                         GameObject heldObject = hit.collider.gameObject;
@@ -258,7 +267,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("paper"))
                 {
-                    UiController.DisplayMessage("Look", true);
+                    UiController.FadeInOut("Look", UiController.UiState.PlayerUi, true);
                     Paper paper = hit.collider.GetComponent<Paper>();
                     if (paper != null && Input.GetKeyDown(keyCodeInter))
                     {
@@ -271,9 +280,9 @@ public class PlayerController : MonoBehaviour
                     {
                         DropObject();
                     }
-                    UiController.DisplayMessage("", false);
-                    UiController.UiDelete();
-                }
+                    UiController.SetFadeCoroutineNull();
+                //UiController.UiDelete(); ! game resource down
+            }
         }
         else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
         {
@@ -281,8 +290,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            UiController.DisplayMessage("", false);
-            UiController.UiDelete();
         }
     }
    
