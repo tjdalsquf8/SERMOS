@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private UiController UiController;
 
     private bool coroutineRunning = false;
+    private string beforeTag;
 
     private KeyCode keyCodeRun = KeyCode.LeftShift;
     private KeyCode keyCodeJump = KeyCode.Space;
@@ -115,7 +117,12 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10))
         {
-                if (hit.collider.CompareTag("door"))
+                if(!hit.collider.CompareTag("Untagged") &&  hit.collider.tag != beforeTag)
+                {
+                        beforeTag = hit.collider.tag;
+                        UiController.SetFadeCoroutineNull();
+                 }
+            if (hit.collider.CompareTag("door"))
                 {
                     //string message, UiState state, bool isCasted = false
                     //StartCoroutine(UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true));
@@ -280,7 +287,6 @@ public class PlayerController : MonoBehaviour
                     {
                         DropObject();
                     }
-                    UiController.SetFadeCoroutineNull();
                 //UiController.UiDelete(); ! game resource down
             }
         }
