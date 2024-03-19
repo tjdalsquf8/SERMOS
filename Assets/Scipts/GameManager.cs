@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
 
     [Header("SystemMessage UI")]
     [SerializeField]
-    private TextMeshPro text;
+    private TextMeshProUGUI text;
+
+    [Header("Player UI")]
+    [SerializeField]
+    private TextMeshProUGUI _text;
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;
@@ -38,4 +42,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public TextMeshProUGUI GetPlayerGUI()
+    {
+        return _text;
+    }
 }
