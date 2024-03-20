@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngineInternal;
+using System.Runtime.CompilerServices;
+using static UnityEngine.UI.Image;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,10 +17,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private UiController UiController;
+    private Camera mainCamera;
 
-    private bool coroutineRunning = false;
+    private LineRenderer _lineRenderer;
+
+    Vector3 origin;
+    Vector3 direction;
+
+    private bool isUntagged = false;
     private string beforeTag;
-
     private KeyCode keyCodeRun = KeyCode.LeftShift;
     private KeyCode keyCodeJump = KeyCode.Space;
     private KeyCode keyCodeInter = KeyCode.F;
@@ -26,10 +33,9 @@ public class PlayerController : MonoBehaviour
     private MovementCharacterController movement;
     private Status status;
     private AudioSource audioSource;
-    private Camera mainCamera;
     //private PlayerAnimatorController animator;
     private Animator _animator;
-    
+    private TaggedObjects _taggedObj;
     
     private void Awake()
     {
@@ -42,6 +48,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -115,133 +122,142 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
         RaycastHit hit;
+        Vector3 origin = mainCamera.transform.position;
+        Vector3 direction = mainCamera.transform.forward;
         if (Physics.Raycast(ray, out hit, 10))
         {
-                if(!hit.collider.CompareTag("Untagged") &&  hit.collider.tag != beforeTag)
-                {
-                        beforeTag = hit.collider.tag;
-                        UiController.SetFadeCoroutineNull();
-                 }
+            _lineRenderer.SetPosition(0, origin);
+            _lineRenderer.SetPosition(1, hit.point);
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("taggedItem") && _taggedObj == null)
+            {
+                _taggedObj = hit.collider.GetComponent<TaggedObjects>();
+                _taggedObj.SetIsRayCasted(true);
+            }
+            /* if (hit.collider.CompareTag("Untagged") && !isUntagged) {
+                 UiController.FadeInOut(UiController.GetCurrentPlayerUiText(), UiController.UiState.PlayerUi, false);
+                 isUntagged = true;
+             }*/
+            if (!hit.collider.CompareTag("Untagged") && hit.collider.tag != beforeTag)
+            {
+                beforeTag = hit.collider.tag;
+                UiController.SetFadeCoroutineNull();
+            }
             if (hit.collider.CompareTag("door"))
+            {
+                //string message, UiState state, bool isCasted = false
+                //StartCoroutine(UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true));
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    //string message, UiState state, bool isCasted = false
-                    //StartCoroutine(UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true));
-                    if (Input.GetKeyDown(keyCodeInter))
+                    Door door = hit.collider.gameObject.GetComponent<Door>();
+                    float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
+                    //      ȸ        ȸ                            Ͽ    ȯ
+                    float distanceX = transform.position.x - hit.transform.position.x;
+                    if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
                     {
-                        Door door = hit.collider.gameObject.GetComponent<Door>();
-                        float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
-                        //      ȸ        ȸ                            Ͽ    ȯ
-                        float distanceX = transform.position.x - hit.transform.position.x;
-                        if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
-                        {
-                            door.SetParams(0);
-                        }
-                        else if (distanceX > 0) // player          x      Ŭ    
-                        {
-                            door.SetParams(1);
-                        }
-                        else
-                        {
-                            door.SetParams(-1);
-                        }
+                        door.SetParams(0);
+                    }
+                    else if (distanceX > 0) // player          x      Ŭ    
+                    {
+                        door.SetParams(1);
+                    }
+                    else
+                    {
+                        door.SetParams(-1);
                     }
                 }
-                else if (hit.collider.CompareTag("box"))
+            }
+            else if (hit.collider.CompareTag("box"))
+            {
+
+                Box box = null;
+                if (box == null)
                 {
-                 
-                    Box box = null;
-                    if (box == null)
-                    {
-                        box = hit.collider.GetComponent<Box>();
-                    }
-                    if (Input.GetKeyDown(keyCodeInter))
-                    {
-                        if (box.AniGetBool())
-                        {
-                            box.AniSetBool(false);
-                        }
-                        else
-                        {
-                            box.AniSetBool(true);
-                        }
-                    }
-                   // if (box != null && !box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Open the box", UiController.UiState.PlayerUi, true));
-                   // else if (box != null && box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Close the box", UiController.UiState.PlayerUi, true));
+                    box = hit.collider.GetComponent<Box>();
                 }
-                else if (hit.collider.CompareTag("table"))
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    Table table = null;
-                    if (table == null) table = hit.collider.GetComponent<Table>();
-                    if (Input.GetKeyDown(keyCodeInter))
+                    if (box.AniGetBool())
                     {
-                        if (table.AniGetBool())
-                        {
-                            table.AniSetBool(false);
-                        }
-                        else
-                        {
-                            table.AniSetBool(true);
-                        }
+                        box.AniSetBool(false);
                     }
+                    else
+                    {
+                        box.AniSetBool(true);
+                    }
+                }
+                // if (box != null && !box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Open the box", UiController.UiState.PlayerUi, true));
+                // else if (box != null && box.AniGetBool()) StartCoroutine(UiController.FadeInOut("Close the box", UiController.UiState.PlayerUi, true));
+            }
+            else if (hit.collider.CompareTag("table"))
+            {
+                Table table = null;
+                if (table == null) table = hit.collider.GetComponent<Table>();
+                if (Input.GetKeyDown(keyCodeInter))
+                {
+                    if (table.AniGetBool())
+                    {
+                        table.AniSetBool(false);
+                    }
+                    else
+                    {
+                        table.AniSetBool(true);
+                    }
+                }
                 if (table != null && !table.AniGetBool())
                 {
-                    UiController.FadeInOut("Open the drawer", UiController.UiState.PlayerUi, true);
                 }
                 else if (table != null && table.AniGetBool())
                 {
-                    UiController.FadeInOut("Close the drawer", UiController.UiState.PlayerUi, true);
                 }
-                }
-                else if (hit.collider.CompareTag("safebox"))
+            }
+            // table end 
+            else if (hit.collider.CompareTag("safebox"))
+            {
+                SafeBox safebox = null;
+                if (safebox == null) safebox = hit.collider.GetComponent<SafeBox>();
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    UiController.FadeInOut("Open the safeBox", UiController.UiState.PlayerUi, true);
-                    SafeBox safebox = null;
-                    if(safebox == null) safebox = hit.collider.GetComponent<SafeBox>();
-                    if (Input.GetKeyDown(keyCodeInter))
+                    if (safebox.AniGetBool())
                     {
-                        if (safebox.AniGetBool())
-                        {
-                            safebox.AniSetBool(false);
-                        }
-                        else
-                        {
-                            safebox.AniSetBool(true);
-                        }
+                        safebox.AniSetBool(false);
                     }
+                    else
+                    {
+                        safebox.AniSetBool(true);
+                    }
+                }
                 if (safebox != null && !safebox.AniGetBool()) UiController.FadeInOut("Open the safebox", UiController.UiState.PlayerUi, true);
                 else if (safebox != null && safebox.AniGetBool()) UiController.FadeInOut("Close the safebox", UiController.UiState.PlayerUi, true);
             }
-                else if (hit.collider.CompareTag("concretedoor"))
-                {
-                    UiController.FadeInOut("Open the concreteDoor", UiController.UiState.PlayerUi, true);
-                    ConcreteDoor concreatdoor = null;
-                    if(concreatdoor == null) concreatdoor = hit.collider.GetComponent<ConcreteDoor>();
+            else if (hit.collider.CompareTag("concretedoor"))
+            {
+                UiController.FadeInOut("Open the concreteDoor", UiController.UiState.PlayerUi, true);
+                ConcreteDoor concreatdoor = null;
+                if (concreatdoor == null) concreatdoor = hit.collider.GetComponent<ConcreteDoor>();
 
-                    if (Input.GetKeyDown(keyCodeInter))
+                if (Input.GetKeyDown(keyCodeInter))
+                {
+                    if (concreatdoor.AniGetBool())
                     {
-                        if (concreatdoor.AniGetBool())
-                        {
-                            concreatdoor.AniGetBool(false);
-                        }
-                        else
-                        {
-                            concreatdoor.AniGetBool(true);
-                        }
+                        concreatdoor.AniGetBool(false);
                     }
+                    else
+                    {
+                        concreatdoor.AniGetBool(true);
+                    }
+                }
                 if (concreatdoor != null && !concreatdoor.AniGetBool()) UiController.FadeInOut("Open the concreatdoor", UiController.UiState.PlayerUi, true);
                 else if (concreatdoor != null && concreatdoor.AniGetBool()) UiController.FadeInOut("Close the concreatdoor", UiController.UiState.PlayerUi, true);
             }
-                else if (hit.collider.CompareTag("griddoor"))
-                {
-                    UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true);
-                    GridDoor griddoor = null;
-                    if(griddoor == null) griddoor = hit.collider.GetComponent<GridDoor>();
+            else if (hit.collider.CompareTag("griddoor"))
+            {
+                GridDoor griddoor = null;
+                if (griddoor == null) griddoor = hit.collider.GetComponent<GridDoor>();
 
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject firstChild = null;
                     if (firstChild == null && _rightHand.transform.childCount > 0) firstChild = _rightHand.transform.GetChild(0).gameObject;
-                   // GameObject firstChild = _rightHand.transform.GetChild(0).gameObject != null ? _rightHand.transform.GetChild(0).gameObject : null; ;
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
                         ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
@@ -254,51 +270,57 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (firstChild == null) griddoor.AniSetBool(false);
                 }
-                }
-                else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
+            }
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
+            {
+                if (Input.GetKeyDown(keyCodeInter))
                 {
-                    UiController.FadeInOut("Pick Up", UiController.UiState.PlayerUi, true);
-                    if (Input.GetKeyDown(keyCodeInter))
+                    GameObject heldObject = hit.collider.gameObject;
+                    ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
+                    if (hit.collider.CompareTag("key") && !hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
                     {
-                        GameObject heldObject = hit.collider.gameObject;
-                        ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                        if (hit.collider.CompareTag("key") && !hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
-                        {
-                            heldObject.transform.SetParent(_rightHand.transform);
-                            heldObject.transform.localPosition = Vector3.zero;
-                            heldObject.transform.localRotation = Quaternion.identity;
-                            heldObject.GetComponent<Rigidbody>().isKinematic = true;
-                            hitItemPickUp.SetIsHolded(true);
-                        }
+                        heldObject.transform.SetParent(_rightHand.transform);
+                        heldObject.transform.localPosition = Vector3.zero;
+                        heldObject.transform.localRotation = Quaternion.identity;
+                        heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                        hitItemPickUp.SetIsHolded(true);
                     }
                 }
-                else if (hit.collider.CompareTag("paper"))
+            }
+            else if (hit.collider.CompareTag("paper"))
+            {
+                UiController.FadeInOut("Look", UiController.UiState.PlayerUi, true);
+                Paper paper = hit.collider.GetComponent<Paper>();
+                if (paper != null && Input.GetKeyDown(keyCodeInter))
                 {
-                    UiController.FadeInOut("Look", UiController.UiState.PlayerUi, true);
-                    Paper paper = hit.collider.GetComponent<Paper>();
-                    if (paper != null && Input.GetKeyDown(keyCodeInter))
-                    {
-                        paper.Interact();
-                    }
+                    paper.Interact();
                 }
-                else // raycast find object but, tag is Untagged
+            }
+            else // raycast find object but, tag is Untagged
+            {
+
+
+                if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                 {
-                    if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
-                    {
-                        DropObject();
-                    }
+                    DropObject();
+                }
                 //UiController.UiDelete(); ! game resource down
             }
-        }
-        else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
-        {
-            DropObject();
-        }
-        else
-        {
-        }
+            }
+            else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
+            {
+                DropObject();
+            }
+            else
+            {
+                if (_taggedObj != null)
+                {
+                    Debug.Log("eqw");
+                    _taggedObj.SetIsRayCasted(false);
+                    _taggedObj = null;
+                }
+            }
     }
-   
     public void DropObject() // drop first object in _rightHand 
     {
         Transform firstChild = _rightHand.transform.GetChild(0);
