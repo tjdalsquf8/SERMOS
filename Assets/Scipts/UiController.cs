@@ -3,42 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class UiController : MonoBehaviour
 {
 
-    public enum UiState
-    {
-        PlayerUi,
-        SystemUi
+    public enum ObjectTags
+    { 
+        door = 0,
+        concretedoor = 0,
+        griddoor = 0,
+        box = 2, // message box
+        table = 4, // message drawer
+        key = 5, // message pick Up
+        paper = 6,
     }
-    private Coroutine fadeCoroutine;
-    private string currentPlayerUitext;
-    [Header("message UI")]
+    [Header("Player UI List")]
     [SerializeField]
-    private GameObject playerUI;
-    private TextMeshProUGUI playerUITextMeshPro;
+    private TextMeshProUGUI[] playerUI;
+    private int playerUISize;
+
+
     public List<GameObject> UiImage = new List<GameObject>();
+    private int beforeUiIdx = 0;
     private float fadeTime = 1.0f;
-    private TextMeshProUGUI text; // system message
-    private TextMeshProUGUI SystemMessage; // system message
+
+    [Header("F Image")]
+    [SerializeField]
+    private Image F;
     private void Awake()
     {
-        SystemMessage = GetComponent<TextMeshProUGUI>();
-        text = SystemMessage;
-        playerUITextMeshPro = playerUI.GetComponentInChildren<TextMeshProUGUI>();
+        playerUISize = playerUI.Length;
     }
-    
-    /*public void DisplayMessage(string message, bool isActive)
+    private void OnEnable()
     {
-        playerUI.SetActive(isActive);
-        if (playerUI != null)
+        for (int i = 0; i < playerUISize; i++)
         {
-            playerUITextMeshPro.text = message;
+            playerUI[i].enabled  = false;
         }
-    }*/
-
+    }
     public void UiDelete()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -53,9 +55,39 @@ public class UiController : MonoBehaviour
         }
     }
 
-    private IEnumerator Fade(float start, float end, string message, UiState state) // Fade out = Fade(1,0, "")
+    public void SetTextGUI(int value)
     {
-        Debug.Log("run fade coroutine");
+
+        // 1. value가 지금 켜져있는 value에 해당하는 UI와 같을 경우 return
+        // 2. 다를 경우 켜져 있는 ui를 끄고 value에 해당하는 UI를 킴
+        // 3. raycast가 false 거나 Untagged 일경우
+        // value = -1;
+        // value = - 1 일경우 이전 idx와 같아 두번째 if 실행 x
+        if(value < 0)
+        {
+            beforeUiIdx = value;
+            for (int i = 0; i < playerUISize; i++)
+            {
+                if (playerUI[i].enabled)
+                {
+                    playerUI[i].enabled = false;
+                    break;
+                }
+            }
+            return;
+        }
+        if (!playerUI[value].enabled && beforeUiIdx != value)
+        {
+            if(beforeUiIdx > 0 )playerUI[beforeUiIdx ].enabled = false;
+            beforeUiIdx = value;
+            playerUI[value].enabled = true;
+            return;
+        }
+    } // value가 달라 겹쳐 보임
+
+    #region FadeInout Code Dont Use
+   /* private IEnumerator Fade(float start, float end, string message, UiState state) // Fade out = Fade(1,0, "")
+    {
         float currentTime = 0;
         float percent = 0;
         if (state == UiState.PlayerUi)
@@ -83,7 +115,6 @@ public class UiController : MonoBehaviour
             yield return null;
         }
     }
-
     public void FadeInOut(string message, UiState state, bool isCasted = false)
     {
         if (fadeCoroutine != null)
@@ -127,5 +158,6 @@ public class UiController : MonoBehaviour
     public void SetCurrentPlayerUiText(string message)
     {
         currentPlayerUitext = message;
-    }
+    }*/
+    #endregion
 }

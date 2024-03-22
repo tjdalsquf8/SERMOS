@@ -17,7 +17,7 @@ public class RotateToMouse : MonoBehaviour
      x축의 회전 방향이 + 일경우 아래를 봄 > 마우스 아래로 이동값에 +   x 회전 값 +
      */
     private float limitMinX = -80;
-    private float limitMaxX = 50;
+    private float limitMaxX = 70;
     private float eulerAngleX;
     private float eulerAngleY;
     // Update is called once per frame

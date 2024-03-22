@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngineInternal;
 using System.Runtime.CompilerServices;
 using static UnityEngine.UI.Image;
+using UnityEngine.SearchService;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private UiController UiController;
-    private Camera mainCamera;
 
+    private Camera mainCamera;
     private LineRenderer _lineRenderer;
 
     Vector3 origin;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _lineRenderer = GetComponent<LineRenderer>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {   /*
@@ -128,24 +129,9 @@ public class PlayerController : MonoBehaviour
         {
             _lineRenderer.SetPosition(0, origin);
             _lineRenderer.SetPosition(1, hit.point);
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("taggedItem") && _taggedObj == null)
-            {
-                _taggedObj = hit.collider.GetComponent<TaggedObjects>();
-                _taggedObj.SetIsRayCasted(true);
-            }
-            /* if (hit.collider.CompareTag("Untagged") && !isUntagged) {
-                 UiController.FadeInOut(UiController.GetCurrentPlayerUiText(), UiController.UiState.PlayerUi, false);
-                 isUntagged = true;
-             }*/
-            if (!hit.collider.CompareTag("Untagged") && hit.collider.tag != beforeTag)
-            {
-                beforeTag = hit.collider.tag;
-                UiController.SetFadeCoroutineNull();
-            }
+            
             if (hit.collider.CompareTag("door"))
             {
-                //string message, UiState state, bool isCasted = false
-                //StartCoroutine(UiController.FadeInOut("Open the Door", UiController.UiState.PlayerUi, true));
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     Door door = hit.collider.gameObject.GetComponent<Door>();
@@ -196,18 +182,22 @@ public class PlayerController : MonoBehaviour
                 {
                     if (table.AniGetBool())
                     {
+                        UiController.SetTextGUI((int)UiController.ObjectTags.table);
                         table.AniSetBool(false);
                     }
                     else
                     {
+                        UiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
                         table.AniSetBool(true);
                     }
                 }
                 if (table != null && !table.AniGetBool())
                 {
+                    UiController.SetTextGUI((int)UiController.ObjectTags.table);
                 }
                 else if (table != null && table.AniGetBool())
                 {
+                    UiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
                 }
             }
             // table end 
@@ -226,12 +216,12 @@ public class PlayerController : MonoBehaviour
                         safebox.AniSetBool(true);
                     }
                 }
-                if (safebox != null && !safebox.AniGetBool()) UiController.FadeInOut("Open the safebox", UiController.UiState.PlayerUi, true);
-                else if (safebox != null && safebox.AniGetBool()) UiController.FadeInOut("Close the safebox", UiController.UiState.PlayerUi, true);
+                if (safebox != null && !safebox.AniGetBool()) { }
+                else if (safebox != null && safebox.AniGetBool()) { }
             }
             else if (hit.collider.CompareTag("concretedoor"))
             {
-                UiController.FadeInOut("Open the concreteDoor", UiController.UiState.PlayerUi, true);
+               
                 ConcreteDoor concreatdoor = null;
                 if (concreatdoor == null) concreatdoor = hit.collider.GetComponent<ConcreteDoor>();
 
@@ -246,8 +236,8 @@ public class PlayerController : MonoBehaviour
                         concreatdoor.AniGetBool(true);
                     }
                 }
-                if (concreatdoor != null && !concreatdoor.AniGetBool()) UiController.FadeInOut("Open the concreatdoor", UiController.UiState.PlayerUi, true);
-                else if (concreatdoor != null && concreatdoor.AniGetBool()) UiController.FadeInOut("Close the concreatdoor", UiController.UiState.PlayerUi, true);
+                if (concreatdoor != null && !concreatdoor.AniGetBool()) { }
+                else if (concreatdoor != null && concreatdoor.AniGetBool()) { }
             }
             else if (hit.collider.CompareTag("griddoor"))
             {
@@ -273,6 +263,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
             {
+                UiController.SetTextGUI((int)UiController.ObjectTags.key);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
@@ -289,7 +280,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("paper"))
             {
-                UiController.FadeInOut("Look", UiController.UiState.PlayerUi, true);
+               
                 Paper paper = hit.collider.GetComponent<Paper>();
                 if (paper != null && Input.GetKeyDown(keyCodeInter))
                 {
@@ -298,7 +289,7 @@ public class PlayerController : MonoBehaviour
             }
             else // raycast find object but, tag is Untagged
             {
-
+                UiController.SetTextGUI(-1);
 
                 if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                 {
@@ -313,12 +304,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (_taggedObj != null)
-                {
-                    Debug.Log("eqw");
-                    _taggedObj.SetIsRayCasted(false);
-                    _taggedObj = null;
-                }
+            UiController.SetTextGUI(-1);
+           
             }
     }
     public void DropObject() // drop first object in _rightHand 
