@@ -24,22 +24,6 @@ public class Table : TaggedObjects
 
     private void Update()
     {
-        if (_isRaycasted == true && _coroutine == null && _currentIsOpen) { // drawer opened at pressed 'f'
-            StopCoroutine(Fade(0f, 1.0f));
-            _text.text = _isOpen;
-            _coroutine = StartCoroutine(Fade(0f, 1.0f));
-        }
-        else if (_isRaycasted == true && _coroutine != null && !_currentIsOpen) { // drawer close at pressed 'f'
-            StopCoroutine(Fade(0f, 1.0f));
-            _text.text = _isOpen;
-            StartCoroutine(Fade(1.0f, 0f));
-            _coroutine = null;
-        } else if (_isRaycasted == false && _coroutine != null)
-        {
-            StopCoroutine(Fade(0f, 1.0f));
-            _coroutine = null;
-            StartCoroutine(Fade(1.0f, 0f));
-        }
         
     }
     private void Start()
@@ -54,7 +38,6 @@ public class Table : TaggedObjects
         
        // StartCoroutine(PlayGridDoorSounds());
         _animator.SetBool("isOpen", isOpen);
-        _currentIsOpen = isOpen;
        // StopCoroutine(PlayGridDoorSounds());
     }
     public bool AniGetBool() {

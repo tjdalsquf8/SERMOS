@@ -14,8 +14,8 @@ public class UiController : MonoBehaviour
         griddoor = 0,
         box = 2, // message box
         table = 4, // message drawer
-        key = 5, // message pick Up
-        paper = 6,
+        key = 6, // message pick Up
+        paper = 7,
     }
     [Header("Player UI List")]
     [SerializeField]
@@ -78,7 +78,12 @@ public class UiController : MonoBehaviour
         }
         if (!playerUI[value].enabled && beforeUiIdx != value)
         {
-            if(beforeUiIdx > 0 )playerUI[beforeUiIdx ].enabled = false;
+            Debug.Log(value);
+
+            if (beforeUiIdx >= 0)
+            {
+                playerUI[beforeUiIdx].enabled = false;
+            }
             beforeUiIdx = value;
             playerUI[value].enabled = true;
             return;

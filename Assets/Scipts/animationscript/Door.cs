@@ -79,4 +79,9 @@ public class Door : MonoBehaviour
     {
         _isRotated = !_isRotated;
     }
+
+    public bool GetIsopened() // 열려 있는 상태를 return해서 player controller에서 추가구현
+    {
+        return true;
+    }
 }
