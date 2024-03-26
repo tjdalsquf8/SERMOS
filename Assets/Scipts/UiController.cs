@@ -78,8 +78,6 @@ public class UiController : MonoBehaviour
         }
         if (!playerUI[value].enabled && beforeUiIdx != value)
         {
-            Debug.Log(value);
-
             if (beforeUiIdx >= 0)
             {
                 playerUI[beforeUiIdx].enabled = false;
