@@ -14,7 +14,7 @@ public class UiController : MonoBehaviour
         griddoor = 0,
         box = 2, // message box
         table = 4, // message drawer
-        key = 6, // message pick Up
+        item = 6, // message pick Up
         paper = 7,
     }
     [Header("Player UI List")]
@@ -25,7 +25,6 @@ public class UiController : MonoBehaviour
 
     public List<GameObject> UiImage = new List<GameObject>();
     private int beforeUiIdx = 0;
-    private float fadeTime = 1.0f;
 
     [Header("F Image")]
     [SerializeField]
@@ -40,6 +39,7 @@ public class UiController : MonoBehaviour
         {
             playerUI[i].enabled  = false;
         }
+        F.enabled = false;
     }
     public void UiDelete()
     {
@@ -70,6 +70,7 @@ public class UiController : MonoBehaviour
             {
                 if (playerUI[i].enabled)
                 {
+                    F.enabled = false;
                     playerUI[i].enabled = false;
                     break;
                 }
@@ -80,9 +81,11 @@ public class UiController : MonoBehaviour
         {
             if (beforeUiIdx >= 0)
             {
+                F.enabled = false;
                 playerUI[beforeUiIdx].enabled = false;
             }
             beforeUiIdx = value;
+            F.enabled = true;
             playerUI[value].enabled = true;
             return;
         }

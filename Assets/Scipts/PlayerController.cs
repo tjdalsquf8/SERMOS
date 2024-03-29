@@ -10,6 +10,7 @@ using UnityEngineInternal;
 using System.Runtime.CompilerServices;
 using static UnityEngine.UI.Image;
 using UnityEngine.SearchService;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -132,25 +133,33 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider.CompareTag("door"))
             {
+                Door door = null;
+                if (door == null) door = hit.collider.gameObject.GetComponent<Door>();
                 if (Input.GetKeyDown(keyCodeInter))
                 {
-                    Door door = hit.collider.gameObject.GetComponent<Door>();
+                   
                     float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
                     //      ȸ        ȸ                            Ͽ    ȯ
                     float distanceX = transform.position.x - hit.transform.position.x;
                     if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
                     {
                         door.SetParams(0);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.box);
                     }
                     else if (distanceX > 0) // player          x      Ŭ    
                     {
                         door.SetParams(1);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
                     }
                     else
                     {
                         door.SetParams(-1);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
                     }
+
                 }
+                if(door != null && !door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                else if(door != null && door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.box+1);
             }
             else if (hit.collider.CompareTag("box"))
             {
@@ -271,7 +280,7 @@ public class PlayerController : MonoBehaviour
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
                         ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
-                        if (key.GetKeyKind() == ItemPickUp.KeyKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
+                        if (key.GetKeyKind() == ItemPickUp.ObjKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
                         {
                             griddoor.AniSetBool(true);
                             key.SetIsUsed(true);
@@ -287,16 +296,15 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
             {
-                UiController.SetTextGUI((int)UiController.ObjectTags.key);
+                UiController.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (hit.collider.CompareTag("key") && !hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
+                    if (!hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
-                        heldObject.transform.localPosition = Vector3.zero;
-                        heldObject.transform.localRotation = Quaternion.identity;
+                        heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
                         hitItemPickUp.SetIsHolded(true);
                     }
@@ -339,11 +347,18 @@ public class PlayerController : MonoBehaviour
     public void DropObject() // drop first object in _rightHand 
     {
         Transform firstChild = _rightHand.transform.GetChild(0);
+        Rigidbody rb = firstChild.GetComponent<Rigidbody>(); 
         firstChild.SetParent(null);
-        firstChild.GetComponent<Rigidbody>().isKinematic = false;
-        firstChild.GetComponent<Rigidbody>().useGravity = true;
+        rb.isKinematic = false;
+        rb.useGravity = true;
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
 
+    public ItemPickUp GetRightHandObj()
+    {
+        if (_rightHand.transform.GetChild(0) == null) return null;
+        if (_rightHand.transform.GetChild(0).GetComponent<ItemPickUp>() == null) return null;
+        return _rightHand.transform.GetChild(0).GetComponent<ItemPickUp>();
+    } 
 
 }

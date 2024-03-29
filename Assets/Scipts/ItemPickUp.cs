@@ -4,15 +4,18 @@ using UnityEngine;
 // 해당 아이템의 사용 유무 확인
 public class ItemPickUp : MonoBehaviour
 {
-    public enum KeyKind : short // enum inherit struct value, ( int, float ... )
+    public enum ObjKind : short // enum inherit struct value, ( int, float ... )
     {
+        notKey,
         under,
         whieDoor,
+        battery,
+        pillow,
     }
     public Item item;
     private bool isUsed = false;
     [SerializeField]
-    private KeyKind keyKind;
+    private ObjKind objKind;
     private bool isHolded = false;
 
     private void Update()
@@ -34,9 +37,9 @@ public class ItemPickUp : MonoBehaviour
     }
     public void SetIsHolded(bool value)
     { isHolded = value; }
-    public KeyKind GetKeyKind()
+    public ObjKind GetKeyKind()
     {
-        return keyKind;
+        return objKind;
     }
 
 }

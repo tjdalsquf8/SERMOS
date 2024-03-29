@@ -82,6 +82,6 @@ public class Door : MonoBehaviour
 
     public bool GetIsopened() // 열려 있는 상태를 return해서 player controller에서 추가구현
     {
-        return true;
+        return _animator.GetBool("isOpen") || _animator.GetBool("isNegOpen");
     }
 }
