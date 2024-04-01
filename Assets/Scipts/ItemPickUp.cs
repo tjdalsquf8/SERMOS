@@ -13,10 +13,10 @@ public class ItemPickUp : MonoBehaviour
         pillow,
     }
     public Item item;
-    private bool isUsed = false;
+    protected bool isUsed = false;
     [SerializeField]
     private ObjKind objKind;
-    private bool isHolded = false;
+    protected bool isHolded = false;
 
     private void Update()
     {

@@ -144,22 +144,22 @@ public class PlayerController : MonoBehaviour
                     if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
                     {
                         door.SetParams(0);
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.door);
                     }
                     else if (distanceX > 0) // player          x      Ŭ    
                     {
                         door.SetParams(1);
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
                     else
                     {
                         door.SetParams(-1);
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                        UiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
 
                 }
-                if(door != null && !door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.box);
-                else if(door != null && door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.box+1);
+                if(door != null && !door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.door );
+                else if(door != null && door.GetIsopened()) UiController.SetTextGUI((int)UiController.ObjectTags.door +1);
             }
             else if (hit.collider.CompareTag("box"))
             {
@@ -323,6 +323,35 @@ public class PlayerController : MonoBehaviour
                     UiController.SetTextGUI((int)UiController.ObjectTags.paper);
                 }
             }
+            else if (hit.collider.CompareTag("Radio"))
+            {
+                Radio radio = null;
+                if (radio == null) radio = hit.collider.GetComponent<Radio>();
+                if (radio != null)
+                {
+                    UiController.SetTextGUI((int)UiController.ObjectTags.radio);
+                }
+                if (radio != null && Input.GetKeyDown(keyCodeInter)) {
+                    Transform battery;
+                    if (_rightHand.transform.GetChild(0) == null)
+                    {
+                        // Can't radio play, Should take battery
+                    }else if(_rightHand.transform.GetChild(0) != null)
+                    {
+                        battery = _rightHand.transform.GetChild(0);
+                        Battery battery_script = battery.GetComponent<Battery>();
+                        if (battery == null)
+                        {
+                            // need battery ui
+                        }
+                        else if (battery != null)
+                        {
+                            battery_script.SetIsUsed(true);
+                            battery_script.SetIsHolded(false);
+                        }
+                    }
+                }
+            }
             else // raycast find object but, tag is Untagged
             {
                 UiController.SetTextGUI(-1);
@@ -354,11 +383,6 @@ public class PlayerController : MonoBehaviour
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
 
-    public ItemPickUp GetRightHandObj()
-    {
-        if (_rightHand.transform.GetChild(0) == null) return null;
-        if (_rightHand.transform.GetChild(0).GetComponent<ItemPickUp>() == null) return null;
-        return _rightHand.transform.GetChild(0).GetComponent<ItemPickUp>();
-    } 
+   
 
 }

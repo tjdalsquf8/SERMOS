@@ -6,16 +6,21 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour
 {
+    [Header("Radio Audio Clip")]
     [SerializeField]
-    private ItemPickUp battery;
+    private AudioClip clip;
 
-    public void GetHint()
+    private bool _audioPlayed = false;
+    private AudioSource _audioSource;
+    private void Awake()
     {
-        if (!battery.GetIsHolded())
-
-       if(battery.GetIsHolded() && ItemPickUp.ObjKind.battery == battery.GetKeyKind())
-        {
-            
-        }
+        
+    }
+    private void Start()
+    {
+    }
+    public void AudioPlay()
+    {
+        Debug.Log("Audio Play!");
     }
 }
