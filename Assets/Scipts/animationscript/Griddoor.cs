@@ -36,7 +36,7 @@ public class GridDoor : MonoBehaviour
         if (!key.GetIsHolded() && !isOpen) // if not holded
         {
             PlayDoorLockedSound();
-        }else if(key.GetIsHolded() && key.GetKeyKind() == ItemPickUp.KeyKind.under)
+        }else if(key.GetIsHolded() && key.GetKeyKind() == ItemPickUp.ObjKind.under)
         {
                 if (!_audio.isPlaying)
                 {

@@ -17,7 +17,7 @@ public class Paper : MonoBehaviour
     {
         if (uiImage.activeSelf)
         {
-            if(Vector3.Distance(_player.transform.position, this.transform.position) > 3) 
+            if(Vector3.Distance(_player.transform.position, this.transform.position) > 6) 
             {
                 uiImage.SetActive(false);
             }

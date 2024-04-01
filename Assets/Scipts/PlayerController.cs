@@ -10,6 +10,7 @@ using UnityEngineInternal;
 using System.Runtime.CompilerServices;
 using static UnityEngine.UI.Image;
 using UnityEngine.SearchService;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _rightHand;
 
     [SerializeField]
-    private UiController UiController;
+    private UiController uiController;
 
     private Camera mainCamera;
     private LineRenderer _lineRenderer;
@@ -132,25 +133,33 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider.CompareTag("door"))
             {
+                Door door = null;
+                if (door == null) door = hit.collider.gameObject.GetComponent<Door>();
                 if (Input.GetKeyDown(keyCodeInter))
                 {
-                    Door door = hit.collider.gameObject.GetComponent<Door>();
+                   
                     float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
                     //      ȸ        ȸ                            Ͽ    ȯ
                     float distanceX = transform.position.x - hit.transform.position.x;
                     if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
                     {
                         door.SetParams(0);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.door);
                     }
                     else if (distanceX > 0) // player          x      Ŭ    
                     {
                         door.SetParams(1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
                     else
                     {
                         door.SetParams(-1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
+
                 }
+                if(door != null && !door.GetIsopened()) uiController.SetTextGUI((int)UiController.ObjectTags.door );
+                else if(door != null && door.GetIsopened()) uiController.SetTextGUI((int)UiController.ObjectTags.door +1);
             }
             else if (hit.collider.CompareTag("box"))
             {
@@ -164,22 +173,22 @@ public class PlayerController : MonoBehaviour
                 {
                     if (box.AniGetBool())
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.box);
                         box.AniSetBool(false);
                     }
                     else
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
                         box.AniSetBool(true);
                     }
                 }
                 if (box != null && !box.AniGetBool())
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.box);
                 }
                 else if (box != null && box.AniGetBool())
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
                 }
             }
             else if (hit.collider.CompareTag("table"))
@@ -190,22 +199,22 @@ public class PlayerController : MonoBehaviour
                 {
                     if (table.AniGetBool())
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.table);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.table);
                         table.AniSetBool(false);
                     }
                     else
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
                         table.AniSetBool(true);
                     }
                 }
                 if (table != null && !table.AniGetBool())
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.table);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.table);
                 }
                 else if (table != null && table.AniGetBool())
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
                 }
             }
         
@@ -217,20 +226,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (safebox.AniGetBool())
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.box);
                         safebox.AniSetBool(false);
                     }
                     else
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.box+1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.box+1);
                         safebox.AniSetBool(true);
                     }
                 }
                 if (safebox != null && !safebox.AniGetBool()) {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.box);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.box);
                 }
                 else if (safebox != null && safebox.AniGetBool()) {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
                 }
             }
             else if (hit.collider.CompareTag("concretedoor"))
@@ -243,20 +252,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (concreatdoor.AniGetBool())
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
                         concreatdoor.AniGetBool(false);
                     }
                     else
                     {
-                        UiController.SetTextGUI((int)UiController.ObjectTags.concretedoor+ 1);
+                        uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor+ 1);
                         concreatdoor.AniGetBool(true);
                     }
                 }
                 if (concreatdoor != null && !concreatdoor.AniGetBool()) {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
                 }
                 else if (concreatdoor != null && concreatdoor.AniGetBool()) {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.concretedoor + 1);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor + 1);
                 }
             }
             else if (hit.collider.CompareTag("griddoor"))
@@ -271,7 +280,7 @@ public class PlayerController : MonoBehaviour
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
                         ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
-                        if (key.GetKeyKind() == ItemPickUp.KeyKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
+                        if (key.GetKeyKind() == ItemPickUp.ObjKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
                         {
                             griddoor.AniSetBool(true);
                             key.SetIsUsed(true);
@@ -282,21 +291,20 @@ public class PlayerController : MonoBehaviour
                 }
                 if (griddoor != null && !griddoor.AniGetBool())
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.door);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.door);
                 }
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
             {
-                UiController.SetTextGUI((int)UiController.ObjectTags.key);
+                uiController.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (hit.collider.CompareTag("key") && !hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
+                    if (!hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
-                        heldObject.transform.localPosition = Vector3.zero;
-                        heldObject.transform.localRotation = Quaternion.identity;
+                        heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
                         hitItemPickUp.SetIsHolded(true);
                     }
@@ -312,12 +320,41 @@ public class PlayerController : MonoBehaviour
                 }
                 if (paper != null && !paper.enabled)
                 {
-                    UiController.SetTextGUI((int)UiController.ObjectTags.paper);
+                    uiController.SetTextGUI((int)UiController.ObjectTags.paper);
+                }
+            }
+            else if (hit.collider.CompareTag("Radio"))
+            {
+                Radio radio = null;
+                if (radio == null) radio = hit.collider.GetComponent<Radio>();
+                if (radio != null)
+                {
+                    uiController.SetTextGUI((int)UiController.ObjectTags.radio);
+                }
+                if (radio != null && Input.GetKeyDown(keyCodeInter)) {
+                    Transform battery;
+                    if (_rightHand.transform.childCount < 1)
+                    {
+                       uiController.RadioPlaybackNoyPossible();
+                    }else if(_rightHand.transform.GetChild(0) != null)
+                    {
+                        battery = _rightHand.transform.GetChild(0);
+                        Battery battery_script = battery.GetComponent<Battery>();
+                        if (battery == null)
+                        {
+                            // need battery ui
+                        }
+                        else if (battery != null)
+                        {
+                            battery_script.SetIsUsed(true);
+                            battery_script.SetIsHolded(false);
+                        }
+                    }
                 }
             }
             else // raycast find object but, tag is Untagged
             {
-                UiController.SetTextGUI(-1);
+                uiController.SetTextGUI(-1);
 
                 if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                 {
@@ -332,18 +369,19 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                UiController.SetTextGUI(-1);
-            
+                uiController.SetTextGUI(-1);
             }
     }
     public void DropObject() // drop first object in _rightHand 
     {
         Transform firstChild = _rightHand.transform.GetChild(0);
+        Rigidbody rb = firstChild.GetComponent<Rigidbody>(); 
         firstChild.SetParent(null);
-        firstChild.GetComponent<Rigidbody>().isKinematic = false;
-        firstChild.GetComponent<Rigidbody>().useGravity = true;
+        rb.isKinematic = false;
+        rb.useGravity = true;
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
 
+   
 
 }
