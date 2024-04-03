@@ -14442,7 +14442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
-      value: door
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -15207,7 +15207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
-      value: door
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16791,7 +16791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fe1fa7dce106b4cb235d9a6501b986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 0}
 --- !u!82 &560489398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16799,12 +16798,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560489388}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: e79ab13881318de47b9a61ca7dc38005, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.743
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -16813,7 +16812,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 2.1119423
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -22667,7 +22666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
-      value: door
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -47833,7 +47832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
-      value: door
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -50087,7 +50086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_TagString
-      value: door
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1959972607403706, guid: 79676301cf8248b4495acad9e4559d9a, type: 3}
       propertyPath: m_StaticEditorFlags

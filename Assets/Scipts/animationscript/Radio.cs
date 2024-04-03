@@ -6,21 +6,22 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour
 {
-    [Header("Radio Audio Clip")]
-    [SerializeField]
-    private AudioClip clip;
+   
 
     private bool _audioPlayed = false;
     private AudioSource _audioSource;
     private void Awake()
     {
-        
+        _audioSource = GetComponent<AudioSource>(); 
     }
     private void Start()
     {
     }
     public void AudioPlay()
     {
-        Debug.Log("Audio Play!");
+        if (_audioPlayed) return;
+        Debug.Log("Play");
+        _audioSource.Play();
+        _audioPlayed = true;
     }
 }
