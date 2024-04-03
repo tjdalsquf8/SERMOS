@@ -10,7 +10,7 @@ public class ItemPickUp : MonoBehaviour
         under,
         whieDoor,
         battery,
-        pillow,
+        pillow,   
     }
     public Item item;
     protected bool isUsed = false;
