@@ -306,6 +306,7 @@ public class PlayerController : MonoBehaviour
                         heldObject.transform.SetParent(_rightHand.transform);
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                        heldObject.GetComponent<MeshCollider>().enabled = false;
                         hitItemPickUp.SetIsHolded(true);
                     }
                 }
@@ -342,7 +343,7 @@ public class PlayerController : MonoBehaviour
                         Battery battery_script = battery.GetComponent<Battery>();
                         if (battery == null)
                         {
-                            // need battery ui
+                            uiController.RadioPlaybackNoyPossible();
                         }
                         else if (battery != null)
                         {
@@ -379,6 +380,7 @@ public class PlayerController : MonoBehaviour
         firstChild.SetParent(null);
         rb.isKinematic = false;
         rb.useGravity = true;
+        firstChild.GetComponent<MeshCollider>().enabled = true;
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
 
