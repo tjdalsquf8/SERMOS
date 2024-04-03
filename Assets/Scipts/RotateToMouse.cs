@@ -11,13 +11,13 @@ public class RotateToMouse : MonoBehaviour
     private float rotCamYAxisSpeed = 2;
 
     /*
-     y축의 회전방향이 + 일경우 오른쪽으로 회전 > 마우스를 오른쪽으로 하면 회전 값 +
+     y축의 회전방향이 + 일경우 오른쪽으로 회전 > 마우스를 오으로 하면 회전 값 +
      y축의 화전방향이 -일경우 왼쪽 회잔 > 마우스 왼쪽으로 회전
      x축의 회전 방향이 - 일경우 위를 봄 > 마우스 위로 이동값에 -  x 회전 값 -
      x축의 회전 방향이 + 일경우 아래를 봄 > 마우스 아래로 이동값에 +   x 회전 값 +
      */
-    private float limitMinX = -80;
-    private float limitMaxX = 70;
+    public float limitMinX = -80;
+    private float limitMaxX = 53;
     private float eulerAngleX;
     private float eulerAngleY;
     // Update is called once per frame

@@ -17,6 +17,7 @@ public class UiController : MonoBehaviour
         item = 6, // message pick Up
         paper = 7,
         radio = 8,
+        pillow = 9,
     }
     [Header("Player UI List")]
     [SerializeField]
@@ -134,5 +135,6 @@ public class UiController : MonoBehaviour
 
     }
 
+    
     
 }

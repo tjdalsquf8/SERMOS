@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour
 {
-   
 
-    private bool _audioPlayed = false;
+
+    [Header("Mirror's box collider")]
+    [SerializeField]
+    private MeshCollider _mirror;
+
     private AudioSource _audioSource;
     private void Awake()
     {
@@ -19,9 +22,7 @@ public class Radio : MonoBehaviour
     }
     public void AudioPlay()
     {
-        if (_audioPlayed) return;
-        Debug.Log("Play");
         _audioSource.Play();
-        _audioPlayed = true;
+        _mirror.enabled = false;
     }
 }
