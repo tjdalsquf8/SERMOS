@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     //private PlayerAnimatorController animator;
     private Animator _animator;
     private TaggedObjects _taggedObj;
-    
+    int layerMask = 1;
     private void Awake()
     {
         Cursor.visible = false;
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
         _lineRenderer = GetComponent<LineRenderer>();
+       layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
     }
     
     // Update is called once per frame
@@ -301,12 +302,16 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (!hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
+                    if (!hitItemPickUp.GetIsHolded()) //  if not holed
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
-                        heldObject.GetComponent<MeshCollider>().enabled = false;
+                        MeshCollider mesh = heldObject.GetComponent<MeshCollider>();
+                        if(mesh == null)
+                        {
+                            mesh.enabled = false;
+                        }
                         hitItemPickUp.SetIsHolded(true);
                     }
                 }
