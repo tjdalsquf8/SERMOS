@@ -19,6 +19,7 @@ public class UiController : MonoBehaviour
         paper = 7,
         radio = 8,
         pillow = 9,
+        breakingWood = 10,
     }
     [Header("Player UI List")]
     [SerializeField]
