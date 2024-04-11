@@ -11,34 +11,35 @@ using System.Runtime.CompilerServices;
 using static UnityEngine.UI.Image;
 using UnityEngine.SearchService;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Breaking woods")]
+    [SerializeField]
+    private BreakingWood[] woods;
+
     [SerializeField]
     private GameObject _rightHand;
 
     [SerializeField]
     private UiController uiController;
 
+
+
+    private KeyCode keyCodeRun               = KeyCode.LeftShift;
+    private KeyCode keyCodeJump              = KeyCode.Space;
+    private KeyCode keyCodeInter             = KeyCode.F;
+    private int  layerMask                   = 1;
+    private bool isEquipAx                   = true;
     private Camera mainCamera;
-    private LineRenderer _lineRenderer;
-
-    Vector3 origin;
-    Vector3 direction;
-
-    private bool isUntagged = false;
-    private string beforeTag;
-    private KeyCode keyCodeRun = KeyCode.LeftShift;
-    private KeyCode keyCodeJump = KeyCode.Space;
-    private KeyCode keyCodeInter = KeyCode.F;
     private RotateToMouse rotateToMouse;
     private MovementCharacterController movement;
     private Status status;
     private AudioSource audioSource;
     //private PlayerAnimatorController animator;
     private Animator _animator;
-    private TaggedObjects _taggedObj;
-    
+
     private void Awake()
     {
         Cursor.visible = false;
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = Camera.main;
         //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
-        _lineRenderer = GetComponent<LineRenderer>();
+       layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
     }
     
     // Update is called once per frame
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         RotateUpdate();
         MoveUpdate();
         // JumpUpdate();
-
+        
     }
 
     private void RotateUpdate()
@@ -80,7 +81,6 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal"); //     
         float z = Input.GetAxisRaw("Vertical"); //     
-
         if (x != 0 || z != 0)
         {
             bool IsRun = false;
@@ -98,17 +98,17 @@ public class PlayerController : MonoBehaviour
 
             //animator.MoveSpeed = 0;
 
-            if (audioSource.isPlaying)
+            /*if (audioSource.isPlaying)
             {
                 audioSource.Stop();
-            }
+            }*/
         }
 
-        if (!movement.characterController.isGrounded)
+      /*  if (!movement.characterController.isGrounded)
         {
             audioSource.Stop();
             //animator.MoveSpeed = 0;
-        }
+        }*/
 
         movement.MoveTo(new Vector3(x, 0.0f, z));
     }
@@ -124,13 +124,8 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = mainCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
         RaycastHit hit;
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 direction = mainCamera.transform.forward;
         if (Physics.Raycast(ray, out hit, 10))
         {
-            _lineRenderer.SetPosition(0, origin);
-            _lineRenderer.SetPosition(1, hit.point);
-
             if (hit.collider.CompareTag("door"))
             {
                 Door door = null;
@@ -294,21 +289,33 @@ public class PlayerController : MonoBehaviour
                     uiController.SetTextGUI((int)UiController.ObjectTags.door);
                 }
             }
-            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item"))
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item")
+                && _rightHand.transform.childCount < 1)
             {
                 uiController.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (!hitItemPickUp.GetIsHolded()) //      Ű   tag  ٲ    
+                    if (!hitItemPickUp.GetIsHolded()) //  if not holed
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
-                        heldObject.GetComponent<MeshCollider>().enabled = false;
+                        MeshCollider mesh = heldObject.GetComponent<MeshCollider>();
+                        if(mesh != null)
+                        {
+                            mesh.enabled = false;
+                        }
                         hitItemPickUp.SetIsHolded(true);
                     }
+
+                    if (hit.collider.CompareTag("Ax")) // animation status change And isEquipAx save true
+                    {
+                        _animator.SetBool("haveAx", true);
+                        isEquipAx = true;
+                    }
+                   
                 }
             }
             else if (hit.collider.CompareTag("paper"))
@@ -353,6 +360,15 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+            else if(isEquipAx && hit.collider.CompareTag("BreakingWood"))
+            {
+                uiController.SetTextGUI((int)UiController.ObjectTags.breakingWood);
+                if(Input.GetKeyDown(keyCodeInter))
+                {
+                    BreakingWoods(); // after delete, when all ready animations
+                    _animator.SetBool("isAttack", true);
+                }
+            }
             else // raycast find object but, tag is Untagged
             {
                 uiController.SetTextGUI(-1);
@@ -376,14 +392,27 @@ public class PlayerController : MonoBehaviour
     public void DropObject() // drop first object in _rightHand 
     {
         Transform firstChild = _rightHand.transform.GetChild(0);
+        if (firstChild.CompareTag("Ax"))
+        {
+            isEquipAx = false;
+            _animator.SetBool("haveAx", false);
+        }
         Rigidbody rb = firstChild.GetComponent<Rigidbody>(); 
         firstChild.SetParent(null);
         rb.isKinematic = false;
         rb.useGravity = true;
-        firstChild.GetComponent<MeshCollider>().enabled = true;
+        firstChild.GetComponent<Collider>().enabled = true;
         firstChild.GetComponent<ItemPickUp>().SetIsHolded(false);
     }
-
-   
-
+    private void SetIsAttackFalse()
+    {
+        _animator.SetBool("isAttack", false);
+    }
+    private void BreakingWoods() // Make animation event in HeavyWeaponSwing
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            woods[i].SetisBreaked(true);
+        }
+    }
 }

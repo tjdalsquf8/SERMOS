@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
 using TMPro;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
+    [Header("Breaking woods")]
+    [SerializeField]
+    private BreakingWood[] woods;
+
     private AudioSource _playerAudio;
     private Animator _playerAnim;
     private AudioSource _enemyAudio;
@@ -32,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (_playerAnim.GetBool("isWalk") ) // player가 걷고 있으면 true
+        if (_playerAnim.GetBool("isWalk")) // player가 걷고 있으면 true
         {
             _enemyAudio.enabled = false; // player가 걷고 있을땐 살인마 발소리가 안들림
         }
@@ -45,5 +50,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI GetPlayerGUI()
     {
         return _text;
+    }
+    
+
+    public void BreakingWoods()
+    {
+        for(int i = 0; i<2; i++)
+        {
+            woods[i].SetisBreaked(true);
+        }
     }
 }
