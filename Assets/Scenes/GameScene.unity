@@ -9648,9 +9648,6 @@ MonoBehaviour:
   enemy: {fileID: 362843953}
   text: {fileID: 0}
   _text: {fileID: 1217400990}
-  woods:
-  - {fileID: 1742069102}
-  - {fileID: 1904085364}
 --- !u!4 &388759172
 Transform:
   m_ObjectHideFlags: 0
