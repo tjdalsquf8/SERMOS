@@ -303,7 +303,7 @@ public class PlayerController : MonoBehaviour
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
                         heldObject.GetComponent<Rigidbody>().isKinematic = true;
                         MeshCollider mesh = heldObject.GetComponent<MeshCollider>();
-                        if(mesh != null)
+                        if (mesh != null)
                         {
                             mesh.enabled = false;
                         }
@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
                         _animator.SetBool("haveAx", true);
                         isEquipAx = true;
                     }
-                   
+                     _animator.Rebind();
                 }
             }
             else if (hit.collider.CompareTag("paper"))
@@ -365,7 +365,7 @@ public class PlayerController : MonoBehaviour
                 uiController.SetTextGUI((int)UiController.ObjectTags.breakingWood);
                 if(Input.GetKeyDown(keyCodeInter))
                 {
-                    BreakingWoods(); // after delete, when all ready animations
+                    //BreakingWoods(); // after delete, when all ready animations
                     _animator.SetBool("isAttack", true);
                 }
             }
