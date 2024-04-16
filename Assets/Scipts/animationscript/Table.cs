@@ -16,6 +16,7 @@ public class Table : TaggedObjects
     private string _isClose = "Open the drawer";
     private string _isOpen = "Close the drawer";
     private bool _currentIsOpen;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
