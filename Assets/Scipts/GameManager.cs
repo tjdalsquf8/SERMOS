@@ -19,9 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
-    [Header("Breaking woods")]
-    [SerializeField]
-    private BreakingWood[] woods;
+    
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;
@@ -53,11 +51,5 @@ public class GameManager : MonoBehaviour
     }
     
 
-    public void BreakingWoods()
-    {
-        for(int i = 0; i<2; i++)
-        {
-            woods[i].SetisBreaked(true);
-        }
-    }
+   
 }
