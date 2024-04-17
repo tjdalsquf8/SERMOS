@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private UiController uiController;
 
     public static PlayerController Instance { get; private set; }
-    public Animator _animator;
+    public Animator _animator { get ; private set; }
     public GameObject _rightHand_ax;
 
 
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private MovementCharacterController movement;
     private Status status;
     private AudioSource audioSource;
+    private Ax _rightHandAxScript;
     //private PlayerAnimatorController animator;
     private void Awake()
     {
@@ -50,9 +51,10 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         status = GetComponent<Status>();
         mainCamera = Camera.main;
-        //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
+        //animator = GetComponent<PlayerAnimatorController>();
        layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
+        _rightHandAxScript = _rightHand_ax.GetComponent<Ax>();
     }
     
     // Update is called once per frame
@@ -127,7 +129,6 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10))
         {
-            Debug.Log(hit.collider.name);
             if (hit.collider.CompareTag("door"))
             {
                 Door door = null;
@@ -315,8 +316,8 @@ public class PlayerController : MonoBehaviour
                     if (hit.collider.CompareTag("Ax")) // animation status change And isEquipAx save true
                     {
                         _rightHand_ax.SetActive(true);
-                        _rightHand_ax.GetComponent<Ax>().SetAx();
                         _animator.SetBool("haveAx", true);
+                        _rightHandAxScript.SetAx();
                         isEquipAx = true;
                         Destroy(hit.collider.gameObject);
                     }

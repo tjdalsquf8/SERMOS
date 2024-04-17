@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ax : ItemPickUp
 {
 
-    public GameObject ax;
     public RuntimeAnimatorController axAnimator;
     public RuntimeAnimatorController playerDefaultAnimator;
     // Start is called before the first frame update
@@ -15,6 +14,6 @@ public class Ax : ItemPickUp
     }
     public void SetAx()
     {
-            PlayerController.Instance._animator.runtimeAnimatorController = playerDefaultAnimator; // ? 어떤 object가 null인지 봐여함
+            PlayerController.Instance._animator.runtimeAnimatorController = axAnimator; // ? Check What object value is null ??
     }
 }
