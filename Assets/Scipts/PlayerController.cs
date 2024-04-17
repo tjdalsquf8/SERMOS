@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UiController uiController;
 
+    public static PlayerController Instance { get; private set; }
+    public Animator _animator;
+    public GameObject _rightHand_ax;
 
 
     private KeyCode keyCodeRun               = KeyCode.LeftShift;
@@ -38,8 +41,6 @@ public class PlayerController : MonoBehaviour
     private Status status;
     private AudioSource audioSource;
     //private PlayerAnimatorController animator;
-    private Animator _animator;
-
     private void Awake()
     {
         Cursor.visible = false;
@@ -126,6 +127,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 10))
         {
+            Debug.Log(hit.collider.name);
             if (hit.collider.CompareTag("door"))
             {
                 Door door = null;
@@ -312,11 +314,13 @@ public class PlayerController : MonoBehaviour
 
                     if (hit.collider.CompareTag("Ax")) // animation status change And isEquipAx save true
                     {
+                        _rightHand_ax.SetActive(true);
+                        _rightHand_ax.GetComponent<Ax>().SetAx();
                         _animator.SetBool("haveAx", true);
                         isEquipAx = true;
+                        Destroy(hit.collider);
                     }
-                     _animator.Rebind();
-                }
+                } 
             }
             else if (hit.collider.CompareTag("paper"))
             {

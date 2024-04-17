@@ -5,18 +5,17 @@ using UnityEngine;
 public class Ax : ItemPickUp
 {
 
+    public GameObject ax;
+    public RuntimeAnimatorController axAnimator;
+    public RuntimeAnimatorController playerDefaultAnimator;
     // Start is called before the first frame update
     void Start()
     {
 
     }
-
-     // Update is called once per frame
-    void Update()
+    public void SetAx()
     {
-    }
-    public bool GetIsHolded()
-    {
-        return isHolded;
+        Debug.Log(PlayerController.Instance._animator == null);
+            PlayerController.Instance._animator.runtimeAnimatorController = playerDefaultAnimator; // ? 어떤 object가 null인지 봐여함
     }
 }
