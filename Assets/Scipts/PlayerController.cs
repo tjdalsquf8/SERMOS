@@ -292,14 +292,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item")
-                && _rightHand.transform.childCount < 1)
+                && _rightHand.transform.childCount < 2)
             {
                 uiController.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (!hitItemPickUp.GetIsHolded()) //  if not holed
+                    if (!hit.collider.CompareTag("Ax") && !hitItemPickUp.GetIsHolded() ) //  if not holed
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour
                         _rightHand_ax.GetComponent<Ax>().SetAx();
                         _animator.SetBool("haveAx", true);
                         isEquipAx = true;
-                        Destroy(hit.collider);
+                        Destroy(hit.collider.gameObject);
                     }
                 } 
             }
@@ -384,7 +384,7 @@ public class PlayerController : MonoBehaviour
                 //UiController.UiDelete(); ! game resource down
             }
             }
-            else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
+            else if (_rightHand.transform.childCount > 1 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
             {
                 DropObject();
             }
@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour
     }
     public void DropObject() // drop first object in _rightHand 
     {
-        Transform firstChild = _rightHand.transform.GetChild(0);
+        Transform firstChild = _rightHand.transform.GetChild(1);
         if (firstChild.CompareTag("Ax"))
         {
             isEquipAx = false;

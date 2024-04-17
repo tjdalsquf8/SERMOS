@@ -15,7 +15,6 @@ public class Ax : ItemPickUp
     }
     public void SetAx()
     {
-        Debug.Log(PlayerController.Instance._animator == null);
             PlayerController.Instance._animator.runtimeAnimatorController = playerDefaultAnimator; // ? 어떤 object가 null인지 봐여함
     }
 }
