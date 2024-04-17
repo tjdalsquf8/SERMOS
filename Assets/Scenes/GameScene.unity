@@ -10014,9 +10014,6 @@ MonoBehaviour:
   enemy: {fileID: 362843953}
   text: {fileID: 0}
   _text: {fileID: 1217400990}
-  woods:
-  - {fileID: 1742069102}
-  - {fileID: 1904085364}
 --- !u!4 &388759172
 Transform:
   m_ObjectHideFlags: 0
@@ -46291,15 +46288,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0833333
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.0833335
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0833335
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46311,7 +46308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.671
+      value: 11.909
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3235c2ecc4e27c241b15f5735127ca86, type: 3}
       propertyPath: m_LocalRotation.w
