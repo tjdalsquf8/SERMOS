@@ -20,12 +20,13 @@ public class PlayerController : MonoBehaviour
     private BreakingWood[] woods;
 
     [SerializeField]
-    private GameObject _rightHand;
+    private GameObject InputInspector_rightHand;
 
     [SerializeField]
     private UiController uiController;
 
     public static PlayerController Instance { get; private set; }
+    public GameObject _rightHand { get; private set; }
     public Animator _animator { get ; private set; }
     public GameObject _rightHand_ax;
 
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour
         //animator = GetComponent<PlayerAnimatorController>();
        layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
         _rightHandAxScript = _rightHand_ax.GetComponent<Ax>();
+        Instance = GetComponent<PlayerController>();
+        _rightHand = InputInspector_rightHand;
     }
     
     // Update is called once per frame
@@ -396,11 +399,15 @@ public class PlayerController : MonoBehaviour
     }
     public void DropObject() // drop first object in _rightHand 
     {
-        Transform firstChild = _rightHand.transform.GetChild(1);
+        Transform firstChild = 
+            _rightHand.transform.childCount > 1 ? // have two childs obj 
+            _rightHand.transform.GetChild(1) : _rightHand.transform.GetChild(0);
         if (firstChild.CompareTag("Ax"))
         {
             isEquipAx = false;
             _animator.SetBool("haveAx", false);
+            _rightHandAxScript.SetDefault();
+            return;
         }
         Rigidbody rb = firstChild.GetComponent<Rigidbody>(); 
         firstChild.SetParent(null);
