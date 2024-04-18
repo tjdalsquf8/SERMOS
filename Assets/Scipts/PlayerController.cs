@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private KeyCode keyCodeJump              = KeyCode.Space;
     private KeyCode keyCodeInter             = KeyCode.F;
     private int  layerMask                   = 1;
-    private bool isEquipAx                   = true;
+    private bool isEquipAx                   = false;
     private Camera mainCamera;
     private RotateToMouse rotateToMouse;
     private MovementCharacterController movement;
@@ -277,7 +277,14 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject firstChild = null;
-                    if (firstChild == null && _rightHand.transform.childCount > 0) firstChild = _rightHand.transform.GetChild(0).gameObject;
+                    if (firstChild == null && _rightHand.transform.childCount > 1)
+                    {
+                        firstChild = _rightHand.transform.GetChild(1).gameObject;
+                    }
+                    else
+                    {
+                        uiController.GridDoorOpenNotPossible();
+                    }
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
                         ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
@@ -352,9 +359,9 @@ public class PlayerController : MonoBehaviour
                     if (_rightHand.transform.childCount < 1)
                     {
                        uiController.RadioPlaybackNoyPossible();
-                    }else if(_rightHand.transform.GetChild(0) != null)
+                    }else if(_rightHand.transform.GetChild(1) != null)
                     {
-                        battery = _rightHand.transform.GetChild(0);
+                        battery = _rightHand.transform.GetChild(1);
                         Battery battery_script = battery.GetComponent<Battery>();
                         if (battery == null)
                         {
@@ -404,6 +411,7 @@ public class PlayerController : MonoBehaviour
             _rightHand.transform.GetChild(1) : _rightHand.transform.GetChild(0);
         if (firstChild.CompareTag("Ax"))
         {
+            if (isEquipAx == false) return;
             isEquipAx = false;
             _animator.SetBool("haveAx", false);
             _rightHandAxScript.SetDefault();

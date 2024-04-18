@@ -20,7 +20,7 @@ public class playerFootSoundController : MonoBehaviour
     {
         _audio = GetComponent<AudioSource>();
         _ani = GameObject.Find("Player").GetComponent<Animator>();
-        usingSounds = concreateFloorSound;
+        usingSounds = woodFloorSound;
     }
    
     
