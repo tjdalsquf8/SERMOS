@@ -291,8 +291,8 @@ public class PlayerController : MonoBehaviour
                         if (key.GetKeyKind() == ItemPickUp.ObjKind.under && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
                         {
                             griddoor.AniSetBool(true);
-                            key.SetIsUsed(true);
                             key.SetIsHolded(false);
+                            key.SetIsUsed(true);
                         }
                     }
                     else if (firstChild == null) griddoor.AniSetBool(false);
@@ -359,15 +359,15 @@ public class PlayerController : MonoBehaviour
                     if (_rightHand.transform.childCount < 1)
                     {
                        uiController.RadioPlaybackNoyPossible();
-                    }else if(_rightHand.transform.GetChild(1) != null)
+                    }else if(_rightHand.transform.childCount > 1)
                     {
                         battery = _rightHand.transform.GetChild(1);
                         Battery battery_script = battery.GetComponent<Battery>();
-                        if (battery == null)
+                        if (battery == null || battery_script == null)
                         {
                             uiController.RadioPlaybackNoyPossible();
                         }
-                        else if (battery != null)
+                        else if (battery != null && battery_script != null)
                         {
                             battery_script.SetIsUsed(true);
                             battery_script.SetIsHolded(false);
