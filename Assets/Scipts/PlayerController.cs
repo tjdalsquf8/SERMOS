@@ -20,26 +20,29 @@ public class PlayerController : MonoBehaviour
     private BreakingWood[] woods;
 
     [SerializeField]
-    private GameObject _rightHand;
+    private GameObject InputInspector_rightHand;
 
     [SerializeField]
     private UiController uiController;
 
+    public static PlayerController Instance { get; private set; }
+    public GameObject _rightHand { get; private set; }
+    public Animator _animator { get ; private set; }
+    public GameObject _rightHand_ax;
 
 
     private KeyCode keyCodeRun               = KeyCode.LeftShift;
     private KeyCode keyCodeJump              = KeyCode.Space;
     private KeyCode keyCodeInter             = KeyCode.F;
     private int  layerMask                   = 1;
-    private bool isEquipAx                   = true;
+    private bool isEquipAx                   = false;
     private Camera mainCamera;
     private RotateToMouse rotateToMouse;
     private MovementCharacterController movement;
     private Status status;
     private AudioSource audioSource;
+    private Ax _rightHandAxScript;
     //private PlayerAnimatorController animator;
-    private Animator _animator;
-
     private void Awake()
     {
         Cursor.visible = false;
@@ -49,9 +52,12 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         status = GetComponent<Status>();
         mainCamera = Camera.main;
-        //animator = GetComponent<PlayerAnimatorController>();
         _animator = GetComponent<Animator>();
+        //animator = GetComponent<PlayerAnimatorController>();
        layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
+        _rightHandAxScript = _rightHand_ax.GetComponent<Ax>();
+        Instance = GetComponent<PlayerController>();
+        _rightHand = InputInspector_rightHand;
     }
     
     // Update is called once per frame
@@ -271,7 +277,14 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject firstChild = null;
-                    if (firstChild == null && _rightHand.transform.childCount > 0) firstChild = _rightHand.transform.GetChild(0).gameObject;
+                    if (firstChild == null && _rightHand.transform.childCount > 1)
+                    {
+                        firstChild = _rightHand.transform.GetChild(1).gameObject;
+                    }
+                    else
+                    {
+                        uiController.GridDoorOpenNotPossible();
+                    }
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
                         ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
@@ -290,14 +303,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item")
-                && _rightHand.transform.childCount < 1)
+                && _rightHand.transform.childCount < 2)
             {
                 uiController.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
                     ItemPickUp hitItemPickUp = heldObject.GetComponent<ItemPickUp>();
-                    if (!hitItemPickUp.GetIsHolded()) //  if not holed
+                    if (!hit.collider.CompareTag("Ax") && !hitItemPickUp.GetIsHolded() ) //  if not holed
                     {
                         heldObject.transform.SetParent(_rightHand.transform);
                         heldObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -312,11 +325,13 @@ public class PlayerController : MonoBehaviour
 
                     if (hit.collider.CompareTag("Ax")) // animation status change And isEquipAx save true
                     {
+                        _rightHand_ax.SetActive(true);
                         _animator.SetBool("haveAx", true);
+                        _rightHandAxScript.SetAx();
                         isEquipAx = true;
+                        Destroy(hit.collider.gameObject);
                     }
-                     _animator.Rebind();
-                }
+                } 
             }
             else if (hit.collider.CompareTag("paper"))
             {
@@ -344,9 +359,9 @@ public class PlayerController : MonoBehaviour
                     if (_rightHand.transform.childCount < 1)
                     {
                        uiController.RadioPlaybackNoyPossible();
-                    }else if(_rightHand.transform.GetChild(0) != null)
+                    }else if(_rightHand.transform.GetChild(1) != null)
                     {
-                        battery = _rightHand.transform.GetChild(0);
+                        battery = _rightHand.transform.GetChild(1);
                         Battery battery_script = battery.GetComponent<Battery>();
                         if (battery == null)
                         {
@@ -380,7 +395,7 @@ public class PlayerController : MonoBehaviour
                 //UiController.UiDelete(); ! game resource down
             }
             }
-            else if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
+            else if (_rightHand.transform.childCount > 1 && Input.GetKeyDown(keyCodeInter)) // raycast cant find obj
             {
                 DropObject();
             }
@@ -391,11 +406,16 @@ public class PlayerController : MonoBehaviour
     }
     public void DropObject() // drop first object in _rightHand 
     {
-        Transform firstChild = _rightHand.transform.GetChild(0);
+        Transform firstChild = 
+            _rightHand.transform.childCount > 1 ? // have two childs obj 
+            _rightHand.transform.GetChild(1) : _rightHand.transform.GetChild(0);
         if (firstChild.CompareTag("Ax"))
         {
+            if (isEquipAx == false) return;
             isEquipAx = false;
             _animator.SetBool("haveAx", false);
+            _rightHandAxScript.SetDefault();
+            return;
         }
         Rigidbody rb = firstChild.GetComponent<Rigidbody>(); 
         firstChild.SetParent(null);

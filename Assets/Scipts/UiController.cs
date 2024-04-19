@@ -25,9 +25,9 @@ public class UiController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI[] playerUI;
 
-    [Header("Radio playback not possible, battery required.")]
+    [Header("Radio playback not possible, battery required. and GridDoor if haven't key")]
     [SerializeField]
-    private TextMeshProUGUI textGUI;
+    private TextMeshProUGUI[] textGUI;
 
     [Header("F Image")]
     [SerializeField]
@@ -124,10 +124,15 @@ public class UiController : MonoBehaviour
     // if dont have battery
    public void RadioPlaybackNoyPossible()
     {
-        StartCoroutine(Fade(0, 1));
+        StartCoroutine(Fade(0, 1, textGUI[0]));
     }
 
-    public IEnumerator Fade(float start, float end)
+    public void GridDoorOpenNotPossible()
+    {
+        StartCoroutine(Fade(0, 1, textGUI[1]));
+    }
+
+    public IEnumerator Fade(float start, float end, TextMeshProUGUI textGUI)
     {
         float currentTime = 0;
         float percent = 0;
