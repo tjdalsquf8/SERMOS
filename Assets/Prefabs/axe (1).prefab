@@ -177,6 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   objKind: 5
-  _Ax: {fileID: 0}
+  _Ax: {fileID: 3474585680949981353}
   axAnimator: {fileID: 22100000, guid: 8a33ad6acc751d64cb395ba8e47e0aab, type: 2}
   playerDefaultAnimator: {fileID: 9100000, guid: 3b1b66959b943db44aee93246adc580f, type: 2}

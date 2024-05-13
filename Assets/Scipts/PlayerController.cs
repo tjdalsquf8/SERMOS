@@ -15,6 +15,9 @@ using UnityEditor.Animations;
 
 public class PlayerController : MonoBehaviour
 {
+    private int  layerMask                   = 1;
+    private bool isEquipAx                   = false;
+    private bool isDied                      = false;
     [Header("Breaking woods")]
     [SerializeField]
     private BreakingWood[] woods;
@@ -24,19 +27,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private UiController uiController;
-
+    [Header("Main Camera")]
+    [SerializeField]
+    private Camera mainCamera;
     public static PlayerController Instance { get; private set; }
     public GameObject _rightHand { get; private set; }
     public Animator _animator { get ; private set; }
     public GameObject _rightHand_ax;
-
-
     private KeyCode keyCodeRun               = KeyCode.LeftShift;
     private KeyCode keyCodeJump              = KeyCode.Space;
     private KeyCode keyCodeInter             = KeyCode.F;
-    private int  layerMask                   = 1;
-    private bool isEquipAx                   = false;
-    private Camera mainCamera;
     private RotateToMouse rotateToMouse;
     private MovementCharacterController movement;
     private Status status;
@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<MovementCharacterController>();
         audioSource = GetComponent<AudioSource>();
         status = GetComponent<Status>();
-        mainCamera = Camera.main;
         _animator = GetComponent<Animator>();
         //animator = GetComponent<PlayerAnimatorController>();
        layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
@@ -69,8 +68,12 @@ public class PlayerController : MonoBehaviour
         Open, Close : door_open, box ( tag )
          */
         RayCasting();
-        RotateUpdate();
-        MoveUpdate();
+        if (!isDied)
+        {
+            RotateUpdate();
+            MoveUpdate();
+        }
+       
         // JumpUpdate();
         
     }
@@ -86,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
 
         float x = Input.GetAxisRaw("Horizontal"); //     
-        float z = Input.GetAxisRaw("Vertical"); //     
+        float z = Input.GetAxisRaw("Vertical"); //
         if (x != 0 || z != 0)
         {
             bool IsRun = false;
@@ -356,7 +359,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (radio != null && Input.GetKeyDown(keyCodeInter)) {
                     Transform battery;
-                    if (_rightHand.transform.childCount < 1)
+                    if (_rightHand.transform.childCount < 2)
                     {
                        uiController.RadioPlaybackNoyPossible();
                     }else if(_rightHand.transform.childCount > 1)
@@ -434,5 +437,20 @@ public class PlayerController : MonoBehaviour
         {
             woods[i].SetisBreaked(true);
         }
+    }
+
+    public void setIsDied(bool value)
+    {
+        isDied = value;
+    }
+   
+    public void setAnimIsHited()
+    {
+        _animator.SetBool("isHited", true);
+    }
+
+    public void SetPlayerLookAtEnemy()
+    {
+        CameraPos.Instance.SetPlayerDiedLookAtEnemy(true);
     }
 }

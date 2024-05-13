@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class Enemy : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip[] audioClipWalk;
+
+    private bool isAttacked = false;
     //열거형으로 정해진 상태값을 사용
     enum State
     {
@@ -57,6 +60,9 @@ public class Enemy : MonoBehaviour
         else if (state == State.Walk)
         {
             UpdateWalk();
+        } else if(state == State.Attack)
+        {
+            UpdateAttack();
         }
         
 
@@ -65,12 +71,12 @@ public class Enemy : MonoBehaviour
     private void UpdateAttack()
     {
         agent.speed = 0;
-        anim.SetBool("isWalking", false);
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance > 2)
-        {
-            state = State.Run;
-        }
+        anim.SetBool("isAttack", true);
+        PlayerController.Instance.setIsDied(true);
+        // 애니매이션 재생 -> 애니매이션 바꾸기
+        // 때리는 타이밍에 player 애니매이션 재생
+        // player 쓰러지는 애니매이션 -> 쓰러지는 애니매이션 구해서 적용 시켜보기
+        // fade in -> game over
     }
 
     private void UpdateWalk ()
@@ -79,7 +85,7 @@ public class Enemy : MonoBehaviour
 
         //남은 거리가 2미터라면 공격한다.
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 2)
+        if (distance <= 5 && !anim.GetBool("isAttack"))
         {
             state = State.Attack;
         }
@@ -98,11 +104,10 @@ public class Enemy : MonoBehaviour
     {
         agent.speed = 0;
         anim.SetBool("isWalking", false);
-
         //생성될때 목적지(Player)를 찿는다.
         target = GameObject.Find("Player").transform;
         //target을 찾으면 Run상태로 전이하고 싶다.
-        if (target != null)
+        if (target != null && !isAttacked)
         {
             state = State.Walk;
             //이렇게 state값을 바꿨다고 animation까지 바뀔까? no! 동기화를 해줘야한다.
@@ -121,5 +126,17 @@ public class Enemy : MonoBehaviour
             audioSource.Play();
         }
         
+    }
+
+    public void PlayerAnimHit()
+    {
+        PlayerController.Instance.setAnimIsHited();
+    }
+
+    public void SetStateIdle()
+    {
+        isAttacked = true;
+        anim.SetBool("isWaling", false);
+        state = State.Idle;
     }
 }
