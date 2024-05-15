@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(target);
         //만약 state가 idle이라면
         if (state == State.Idle)
         {
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
         else if (state == State.Walk)
         {
             UpdateWalk();
-        } else if(state == State.Attack)
+        } else if(state == State.Attack && !isAttacked)
         {
             UpdateAttack();
         }
@@ -73,6 +74,7 @@ public class Enemy : MonoBehaviour
         agent.speed = 0;
         anim.SetBool("isAttack", true);
         PlayerController.Instance.setIsDied(true);
+        isAttacked = true;
         // 애니매이션 재생 -> 애니매이션 바꾸기
         // 때리는 타이밍에 player 애니매이션 재생
         // player 쓰러지는 애니매이션 -> 쓰러지는 애니매이션 구해서 적용 시켜보기
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour
 
         //남은 거리가 2미터라면 공격한다.
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if (distance <= 5 && !anim.GetBool("isAttack"))
+        if (distance <= 3)
         {
             state = State.Attack;
         }
@@ -135,8 +137,6 @@ public class Enemy : MonoBehaviour
 
     public void SetStateIdle()
     {
-        isAttacked = true;
-        anim.SetBool("isWaling", false);
         state = State.Idle;
     }
 }

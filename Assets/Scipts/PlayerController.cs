@@ -449,8 +449,4 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isHited", true);
     }
 
-    public void SetPlayerLookAtEnemy()
-    {
-        CameraPos.Instance.SetPlayerDiedLookAtEnemy(true);
-    }
 }

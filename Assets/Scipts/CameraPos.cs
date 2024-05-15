@@ -38,14 +38,7 @@ public class CameraPos : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (PlayerDiedLookAtEnemy)
-        {
-            PlayerHead.transform.LookAt(EnemyHead);
-        }
+        
     }
-    public void SetPlayerDiedLookAtEnemy(bool value)
-    {
-        Debug.Log(value);
-        PlayerDiedLookAtEnemy = value;
-    }
+  
 }

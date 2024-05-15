@@ -8078,9 +8078,9 @@ Animator:
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
     by Humanoid clips.\n\tTransform 'Hips'\n\tTransform 'Spine1'\n\tTransform 'LeftHandMiddle2'\n\tTransform
-    'Neck'\n\tTransform 'LeftHandThumb1'\n\tTransform 'LeftHandRing2'\n\tTransform
-    'RightHandIndex3'\n\tTransform 'LeftHandRing3'\n\tTransform 'RightHandMiddle1'\n\tTransform
-    'LeftUpLeg'\n\tand more ...\n\tFrom animation clip 'mixamo.com'"
+    'Neck'\n\tTransform 'LeftHandRing2'\n\tTransform 'LeftHandRing3'\n\tTransform
+    'LeftUpLeg'\n\tTransform 'LeftHandIndex2'\n\tTransform 'LeftHandPinky2'\n\tTransform
+    'RightLeg'\n\tand more ...\n\tFrom animation clip 'PriestIlde'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
