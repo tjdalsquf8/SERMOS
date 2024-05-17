@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
             {
                 Door door = null;
                 if (door == null) door = hit.collider.gameObject.GetComponent<Door>();
-                if (Input.GetKeyDown(keyCodeInter))
+                if (Input.GetKeyDown(keyCodeInter) && door)
                 {
                    
                     float doorRotationAngle = Quaternion.Angle(door.transform.rotation, Quaternion.identity);
