@@ -7,7 +7,7 @@ using Unity.VisualScripting.Dependencies.NCalc;
 
 public class UiController : MonoBehaviour
 {
-
+    public static UiController Instance { get; private set; }
     public enum ObjectTags
     { 
         door = 0,
@@ -36,6 +36,7 @@ public class UiController : MonoBehaviour
     [SerializeField]
     private Image mouseButton_0;
 
+    private Coroutine coroutine;
 
     //public List<GameObject> UiImage = new List<GameObject>();
     private Image setImage;
@@ -45,6 +46,7 @@ public class UiController : MonoBehaviour
     private float fadeTime = 1.0f;
     private void Awake()
     {
+        Instance = GetComponent<UiController>();
         playerUISize = playerUI.Length;
         setImage = F;
     }
@@ -124,16 +126,19 @@ public class UiController : MonoBehaviour
     // if dont have battery
    public void RadioPlaybackNoyPossible()
     {
-        StartCoroutine(Fade(0, 1, textGUI[0]));
+        if (coroutine != null) return;
+        coroutine =  StartCoroutine(Fade(0, 1, textGUI[0]));
     }
 
     public void GridDoorOpenNotPossible()
     {
-        StartCoroutine(Fade(0, 1, textGUI[1]));
+        if (coroutine != null) return;
+        coroutine = StartCoroutine(Fade(0, 1, textGUI[1]));
     }
 
     public IEnumerator Fade(float start, float end, TextMeshProUGUI textGUI)
     {
+        
         float currentTime = 0;
         float percent = 0;
         while (percent < 1)
@@ -157,6 +162,7 @@ public class UiController : MonoBehaviour
                Color color = textGUI.color;
             color.a = Mathf.Lerp(end, start, percent);
             textGUI.color = color;
+            coroutine = null;
             yield return null;
         }
 

@@ -20,7 +20,6 @@ public class Ax : ItemPickUp
     public void SetDefault()
     {
         
-        PlayerController.Instance._animator.enabled = false;
         PlayerController.Instance._animator.runtimeAnimatorController = playerDefaultAnimator;
         Instantiate(_Ax, PlayerController.Instance._rightHand.transform.position, PlayerController.Instance._rightHand.transform.rotation);
         this.gameObject.SetActive(false);
