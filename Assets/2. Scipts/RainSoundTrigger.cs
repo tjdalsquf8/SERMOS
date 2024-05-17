@@ -29,7 +29,14 @@ public class RainAudioPlayer : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 'Player' 태그를 가진 객체가 트리거에 들어오면
         {
-            audioSource.Play(); // 비 소리 재생
+            if (audioSource.isPlaying) //비 소리 재생상태 토글
+            {
+                audioSource.Stop(); // 비 소리 재생 중이면 정지
+            }
+            else
+            {
+                audioSource.Play(); // 비 소리 정지 중이면 재생
+            }
         }
     }
 }
