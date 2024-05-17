@@ -32,7 +32,7 @@ public class Battery : ItemPickUp
                 , new Quaternion(-90, Quaternion.identity.y, Quaternion.identity.z, 0 ));
             this.GetComponent<Rigidbody>().isKinematic = true;
             this.SetIsHolded(false);
-            radio.AudioPlay();
+            Radio.batteryCount++;
             isUsed = false;
         }
     }  

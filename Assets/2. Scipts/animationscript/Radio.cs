@@ -13,6 +13,9 @@ public class Radio : MonoBehaviour
     private MeshCollider _mirror;
 
     private AudioSource _audioSource;
+
+    public static int batteryCount = 0;
+    public static bool radioPlayed = false;
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>(); 
@@ -22,7 +25,10 @@ public class Radio : MonoBehaviour
     }
     public void AudioPlay()
     {
+        radioPlayed = true;
         _audioSource.Play();
         _mirror.enabled = false;
     }
+
+   
 }

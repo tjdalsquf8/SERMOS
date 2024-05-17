@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject InputInspector_rightHand;
 
-    [SerializeField]
-    private UiController uiController;
     [Header("Main Camera")]
     [SerializeField]
     private Camera mainCamera;
@@ -148,22 +146,22 @@ public class PlayerController : MonoBehaviour
                     if (doorRotationAngle > 10f) // ȸ    Ͽ  ٸ 
                     {
                         door.SetParams(0);
-                        uiController.SetTextGUI((int)UiController.ObjectTags.door);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door);
                     }
                     else if (distanceX > 0) // player          x      Ŭ    
                     {
                         door.SetParams(1);
-                        uiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
                     else
                     {
                         door.SetParams(-1);
-                        uiController.SetTextGUI((int)UiController.ObjectTags.door + 1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door + 1);
                     }
 
                 }
-                if(door != null && !door.GetIsopened()) uiController.SetTextGUI((int)UiController.ObjectTags.door );
-                else if(door != null && door.GetIsopened()) uiController.SetTextGUI((int)UiController.ObjectTags.door +1);
+                if(door != null && !door.GetIsopened()) UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door );
+                else if(door != null && door.GetIsopened()) UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door +1);
             }
             else if (hit.collider.CompareTag("box"))
             {
@@ -177,22 +175,22 @@ public class PlayerController : MonoBehaviour
                 {
                     if (box.AniGetBool())
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.box);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box);
                         box.AniSetBool(false);
                     }
                     else
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box + 1);
                         box.AniSetBool(true);
                     }
                 }
                 if (box != null && !box.AniGetBool())
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.box);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box);
                 }
                 else if (box != null && box.AniGetBool())
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box + 1);
                 }
             }
             else if (hit.collider.CompareTag("table"))
@@ -203,22 +201,22 @@ public class PlayerController : MonoBehaviour
                 {
                     if (table.AniGetBool())
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.table);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.table);
                         table.AniSetBool(false);
                     }
                     else
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.table + 1);
                         table.AniSetBool(true);
                     }
                 }
                 if (table != null && !table.AniGetBool())
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.table);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.table);
                 }
                 else if (table != null && table.AniGetBool())
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.table + 1);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.table + 1);
                 }
             }
         
@@ -230,20 +228,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (safebox.AniGetBool())
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.box);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box);
                         safebox.AniSetBool(false);
                     }
                     else
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.box+1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box+1);
                         safebox.AniSetBool(true);
                     }
                 }
                 if (safebox != null && !safebox.AniGetBool()) {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.box);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box);
                 }
                 else if (safebox != null && safebox.AniGetBool()) {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.box + 1);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.box + 1);
                 }
             }
             else if (hit.collider.CompareTag("concretedoor"))
@@ -256,20 +254,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (concreatdoor.AniGetBool())
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.concretedoor);
                         concreatdoor.AniGetBool(false);
                     }
                     else
                     {
-                        uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor+ 1);
+                        UiController.Instance.SetTextGUI((int)UiController.ObjectTags.concretedoor+ 1);
                         concreatdoor.AniGetBool(true);
                     }
                 }
                 if (concreatdoor != null && !concreatdoor.AniGetBool()) {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.concretedoor);
                 }
                 else if (concreatdoor != null && concreatdoor.AniGetBool()) {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.concretedoor + 1);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.concretedoor + 1);
                 }
             }
             else if (hit.collider.CompareTag("griddoor"))
@@ -286,7 +284,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        uiController.GridDoorOpenNotPossible();
+                        UiController.Instance.GridDoorOpenNotPossible();
                     }
                     if (firstChild != null && firstChild.CompareTag("key"))
                     {
@@ -302,13 +300,13 @@ public class PlayerController : MonoBehaviour
                 }
                 if (griddoor != null && !griddoor.AniGetBool())
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.door);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door);
                 }
             }
             else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("item")
                 && _rightHand.transform.childCount < 2)
             {
-                uiController.SetTextGUI((int)UiController.ObjectTags.item);
+                UiController.Instance.SetTextGUI((int)UiController.ObjectTags.item);
                 if (Input.GetKeyDown(keyCodeInter))
                 {
                     GameObject heldObject = hit.collider.gameObject;
@@ -346,7 +344,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (paper != null && !paper.enabled)
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.paper);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.paper);
                 }
             }
             else if (hit.collider.CompareTag("Radio"))
@@ -355,32 +353,37 @@ public class PlayerController : MonoBehaviour
                 if (radio == null) radio = hit.collider.GetComponent<Radio>();
                 if (radio != null)
                 {
-                    uiController.SetTextGUI((int)UiController.ObjectTags.radio);
+                    UiController.Instance.SetTextGUI((int)UiController.ObjectTags.radio);
                 }
                 if (radio != null && Input.GetKeyDown(keyCodeInter)) {
                     Transform battery;
-                    if (_rightHand.transform.childCount < 2)
+                    if(Radio.batteryCount == 2)
                     {
-                       uiController.RadioPlaybackNoyPossible();
+                        radio.AudioPlay();
+                    }
+                    else if (_rightHand.transform.childCount < 2)
+                    {
+                       UiController.Instance.RadioPlaybackNoyPossible();
                     }else if(_rightHand.transform.childCount > 1)
                     {
                         battery = _rightHand.transform.GetChild(1);
                         Battery battery_script = battery.GetComponent<Battery>();
                         if (battery == null || battery_script == null)
                         {
-                            uiController.RadioPlaybackNoyPossible();
+                            UiController.Instance.RadioPlaybackNoyPossible();
                         }
                         else if (battery != null && battery_script != null)
                         {
                             battery_script.SetIsUsed(true);
                             battery_script.SetIsHolded(false);
                         }
+                        
                     }
                 }
             }
             else if(isEquipAx && hit.collider.CompareTag("BreakingWood"))
             {
-                uiController.SetTextGUI((int)UiController.ObjectTags.breakingWood);
+                UiController.Instance.SetTextGUI((int)UiController.ObjectTags.breakingWood);
                 if(Input.GetKeyDown(keyCodeInter))
                 {
                     //BreakingWoods(); // after delete, when all ready animations
@@ -389,7 +392,7 @@ public class PlayerController : MonoBehaviour
             }
             else // raycast find object but, tag is Untagged
             {
-                uiController.SetTextGUI(-1);
+                UiController.Instance.SetTextGUI(-1);
 
                 if (_rightHand.transform.childCount > 0 && Input.GetKeyDown(keyCodeInter))
                 {
@@ -404,7 +407,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                uiController.SetTextGUI(-1);
+                UiController.Instance.SetTextGUI(-1);
             }
     }
     public void DropObject() // drop first object in _rightHand 
