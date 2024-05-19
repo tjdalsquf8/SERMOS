@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(target);
         //만약 state가 idle이라면
         if (state == State.Idle)
         {
