@@ -15,6 +15,8 @@ public class Pillow : ItemPickUp
     private Rigidbody rb;
     private Animator _ani;
 
+    [SerializeField]
+    private Transform addForcePos; 
     MeshCollider _mesh;
 
     private void Awake()
@@ -51,7 +53,8 @@ public class Pillow : ItemPickUp
             rb.isKinematic = false;
             rb.useGravity = true;
             this.SetIsHolded(false);
-            rb.velocity = Vector3.forward * 10;
+            this.transform.position = addForcePos.position;
+            rb.velocity = Vector3.forward * 15;
         }
         
         if (_ani.GetBool("isfall"))

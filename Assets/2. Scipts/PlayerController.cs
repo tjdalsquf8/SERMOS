@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private int  layerMask                   = 1;
     private bool isEquipAx                   = false;
     private bool isDied                      = false;
+
     [Header("Breaking woods")]
     [SerializeField]
     private BreakingWood[] woods;
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
     [Header("Main Camera")]
     [SerializeField]
     private Camera mainCamera;
+
+    [SerializeField]
+    private AudioClip hitTheFloor;
     public static PlayerController Instance { get; private set; }
     public GameObject _rightHand { get; private set; }
     public Animator _animator { get ; private set; }
@@ -66,11 +70,8 @@ public class PlayerController : MonoBehaviour
         Open, Close : door_open, box ( tag )
          */
         RayCasting();
-        if (!isDied)
-        {
-            RotateUpdate();
-            MoveUpdate();
-        }
+        RotateUpdate();
+        MoveUpdate();
        
         // JumpUpdate();
         
@@ -80,14 +81,30 @@ public class PlayerController : MonoBehaviour
     {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
+        if (isDied)
+        {
+            mouseX = 0;
+            mouseY = 0;
+            return;
+        }
         rotateToMouse.UpdateRotate(mouseX, mouseY);
     }
 
     private void MoveUpdate()
     {
+       
 
         float x = Input.GetAxisRaw("Horizontal"); //     
         float z = Input.GetAxisRaw("Vertical"); //
+        if (isDied)
+        {
+            x = 0;
+            z = 0;
+            _animator.SetBool("isWalk", false);
+            CharacterController cc = GetComponent<CharacterController>();
+            cc.enabled = false;
+            return;
+        }
         if (x != 0 || z != 0)
         {
             bool IsRun = false;
@@ -450,6 +467,12 @@ public class PlayerController : MonoBehaviour
     public void setAnimIsHited()
     {
         _animator.SetBool("isHited", true);
+    }
+
+   public void HitTheFloorDied()
+    {
+        audioSource.clip = hitTheFloor;
+        audioSource.Play();
     }
 
 }
