@@ -58,20 +58,13 @@ public class UiController : MonoBehaviour
         }
         setImage.enabled = false;
     }
-   /* public void UiDelete()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!Radio.radioPlayed)
         {
-            for (int i = 0; i < UiImage.Count; i++)
-            {
-                if (UiImage[i].activeSelf)
-                {
-                    UiImage[i].SetActive(false);
-                }
-            }
-        }  
-    }*/
-
+            textGUI[2].text = $"Radio Battery {Radio.batteryCount} / 2";
+        }
+    }
     public void SetTextGUI(int value)
     {
         if (value == (int)ObjectTags.pillow)
@@ -126,19 +119,20 @@ public class UiController : MonoBehaviour
     // if dont have battery
    public void RadioPlaybackNoyPossible()
     {
+        
         if (coroutine != null) return;
-        coroutine =  StartCoroutine(Fade(0, 1, textGUI[0]));
+        coroutine = StartCoroutine(Fade(0, 1, textGUI[0]));
     }
-
     public void GridDoorOpenNotPossible()
     {
         if (coroutine != null) return;
         coroutine = StartCoroutine(Fade(0, 1, textGUI[1]));
     }
+ 
 
     public IEnumerator Fade(float start, float end, TextMeshProUGUI textGUI)
     {
-        
+        if(textGUI.enabled == false) textGUI.enabled = true;
         float currentTime = 0;
         float percent = 0;
         while (percent < 1)
