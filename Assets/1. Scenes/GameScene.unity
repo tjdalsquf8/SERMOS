@@ -2032,6 +2032,7 @@ MonoBehaviour:
   item: {fileID: 0}
   objKind: 4
   uicontroller: {fileID: 1507552256}
+  addForcePos: {fileID: 860076690}
 --- !u!114 &87690992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8231,7 +8232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4363578991983522480, guid: 6924745a509f7b746bc74f3d4548b1aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4526299591271190437, guid: 6924745a509f7b746bc74f3d4548b1aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8600,6 +8601,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ca8481a8f4dc4d8dad2efd95654141e, type: 3}
   - {fileID: 8300000, guid: fb603e3fbcb7d4ff4814b853a9fee778, type: 3}
   - {fileID: 8300000, guid: b65c95b13ac0c404a8f736980f5748fb, type: 3}
+  hitSound: {fileID: 8300000, guid: 7ea5b367c664dde4a9b7f30624d2ecd7, type: 3}
 --- !u!95 &362843959
 Animator:
   serializedVersion: 5
@@ -9308,6 +9310,7 @@ MonoBehaviour:
   enemy: {fileID: 362843953}
   text: {fileID: 0}
   _text: {fileID: 1217400990}
+  gameOver: 0
 --- !u!4 &388759172
 Transform:
   m_ObjectHideFlags: 0
@@ -30090,6 +30093,37 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &860076689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 860076690}
+  m_Layer: 0
+  m_Name: PillowAddforcePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &860076690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860076689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.474, z: 0.147}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5637755188534066067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &860475489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65446,7 +65480,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 860076690}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 63054130311805293, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       insertIndex: 1

@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AudioClip[] audioClipWalk;
 
+    [SerializeField]
+    private AudioClip hitSound;
     private bool isAttacked = false;
     //열거형으로 정해진 상태값을 사용
     enum State
@@ -74,6 +76,7 @@ public class Enemy : MonoBehaviour
         agent.speed = 0;
         anim.SetBool("isAttack", true);
         PlayerController.Instance.setIsDied(true);
+        GameManager.instance.gameOver = true;
         isAttacked = true;
         // 애니매이션 재생 -> 애니매이션 바꾸기
         // 때리는 타이밍에 player 애니매이션 재생
@@ -132,6 +135,8 @@ public class Enemy : MonoBehaviour
 
     public void PlayerAnimHit()
     {
+        audioSource.clip = hitSound;
+        audioSource.Play();
         PlayerController.Instance.setAnimIsHited();
     }
 

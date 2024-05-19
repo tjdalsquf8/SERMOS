@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject enemy; // pirest
 
+    public static GameManager instance;
+
     [Header("SystemMessage UI")]
     [SerializeField]
     private TextMeshProUGUI text;
@@ -19,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
-    
+    public bool gameOver = false;
+
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.instance = this;
         _playerAudio = player.GetComponent<AudioSource>();
         _playerAnim = player.GetComponent<Animator>();
         _enemyAnim = enemy.GetComponent<Animator>();
