@@ -17,8 +17,7 @@ public class SoundManager : MonoBehaviour
             // 충돌 지점에서 소리를 재생
             Vector3 collisionPoint = collision.contacts[0].point;
             AudioSource.PlayClipAtPoint(fallSound, collisionPoint);
-            Debug.Log("소리 재생");
-
+                collisioncount++;
             }
         }
     }

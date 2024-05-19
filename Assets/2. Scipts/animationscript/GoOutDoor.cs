@@ -9,15 +9,16 @@ public class GoOutDoor : Door
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public IEnumerator Fade(float start, float end)
+}
+   /* public IEnumerator Fade(float start, float end)
     {
         float currentTime = 0;
         float percent = 0;
@@ -47,3 +48,4 @@ public class GoOutDoor : Door
 
     }
 }
+   */
