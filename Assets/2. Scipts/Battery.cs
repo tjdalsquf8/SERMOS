@@ -33,6 +33,7 @@ public class Battery : ItemPickUp
             this.GetComponent<Rigidbody>().isKinematic = true;
             this.SetIsHolded(false);
             Radio.batteryCount++;
+            UiController.Instance.ShowCountBatteryUI();
             isUsed = false;
         }
     }  

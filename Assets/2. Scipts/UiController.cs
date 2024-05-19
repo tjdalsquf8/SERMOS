@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting.Dependencies.NCalc;
+using Unity.VisualScripting;
 
 public class UiController : MonoBehaviour
 {
@@ -119,9 +120,26 @@ public class UiController : MonoBehaviour
     // if dont have battery
    public void RadioPlaybackNoyPossible()
     {
+
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            Color color = textGUI[0].color;
+            color.a = 0.0f;
+            textGUI[0].color = color;
+
+            Color color1 = textGUI[2].color;
+            color1.a = 0.0f;
+            textGUI[2].color = color1;
+
+            coroutine = StartCoroutine(Fade(0, 1, textGUI[0]));
+        }
+        else
+        {
+            coroutine = StartCoroutine(Fade(0, 1, textGUI[0]));
+        }
         
-        if (coroutine != null) return;
-        coroutine = StartCoroutine(Fade(0, 1, textGUI[0]));
     }
     public void GridDoorOpenNotPossible()
     {
@@ -129,7 +147,11 @@ public class UiController : MonoBehaviour
         coroutine = StartCoroutine(Fade(0, 1, textGUI[1]));
     }
  
-
+    public void ShowCountBatteryUI()
+    {
+        textGUI[2].text = $"Radio Battery {Radio.batteryCount} / 2";
+        coroutine = StartCoroutine(Fade(0, 1, textGUI[2]));
+    }
     public IEnumerator Fade(float start, float end, TextMeshProUGUI textGUI)
     {
         if(textGUI.enabled == false) textGUI.enabled = true;
