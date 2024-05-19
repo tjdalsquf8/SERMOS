@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private bool _isRotated = false;
-    private int _param = 0;
-    private Animator _animator;
+    protected bool _isRotated = false;
+    protected int _param = 0;
+    protected Animator _animator;
     [SerializeField]
-    private AudioClip _openSound;
+    protected AudioClip _openSound;
     [SerializeField]
-    private AudioClip _closeSound;
+    protected AudioClip _closeSound;
     public Animator _cousionanimator;
     
 
-    private  AudioSource audio;
-    private void Awake()
+    protected  AudioSource audio;
+    protected void Awake()
     {
         _animator = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
     }
-    private void Start()
+    protected void Start()
     {
         audio.clip = _openSound;
     }
