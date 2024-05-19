@@ -16144,7 +16144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97312598b3bfecd40a6f628954765c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamemanager: {fileID: 0}
+  gamemanager: {fileID: 388759171}
   _openSound: {fileID: 8300000, guid: e51b3ee90cc422e4c93aafaa283bce7b, type: 3}
 --- !u!95 &513303443
 Animator:
@@ -63859,11 +63859,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
+      value: 99.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.4
+=======
       value: 102.78
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.6
+>>>>>>> 81b9d36aa8e5e27125ec2c9c4525338ba893783c
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalPosition.z

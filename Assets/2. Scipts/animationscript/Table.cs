@@ -36,7 +36,8 @@ public class Table : TaggedObjects
 
     public void AniSetBool(bool isOpen)
     {
-        
+
+        _audio.Play();
        // StartCoroutine(PlayGridDoorSounds());
         _animator.SetBool("isOpen", isOpen);
        // StopCoroutine(PlayGridDoorSounds());
