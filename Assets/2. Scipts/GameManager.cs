@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+   
     [Header("SystemMessage UI")]
     [SerializeField]
     private TextMeshProUGUI text;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _text;
 
     public bool gameOver = false;
-
+    public bool gameClear = true;
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;

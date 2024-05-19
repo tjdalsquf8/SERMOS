@@ -12,6 +12,7 @@ public class ItemPickUp : MonoBehaviour
         battery,
         pillow,   
         ax,
+        master,
     }
     public Item item;
     protected bool isUsed = false;
