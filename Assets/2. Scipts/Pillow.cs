@@ -51,7 +51,7 @@ public class Pillow : ItemPickUp
             rb.isKinematic = false;
             rb.useGravity = true;
             this.SetIsHolded(false);
-            rb.AddForce(Vector3.forward * 10, ForceMode.Impulse);
+            rb.velocity = Vector3.forward * 10;
         }
         
         if (_ani.GetBool("isfall"))
