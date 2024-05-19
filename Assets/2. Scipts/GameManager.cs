@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI _text;
 
     public bool gameOver = false;
-    public bool gameClear = true;
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;

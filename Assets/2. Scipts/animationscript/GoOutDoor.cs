@@ -32,20 +32,6 @@ public class GoOutDoor : Door
             yield return null;
         }
 
-        yield return new WaitForSeconds(1f);
-
-        currentTime = 0;
-        percent = 0;
-        while (percent < 1)
-        {
-            currentTime += Time.deltaTime;
-            percent = currentTime / fadeTime;
-            Color color = image.color;
-            color.a = Mathf.Lerp(end, start, percent);
-            image.color = color;
-            yield return null;
-        }
-
-    }
+    
 }
    */
