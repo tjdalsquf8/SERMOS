@@ -35,6 +35,7 @@ public class Door : MonoBehaviour {
 	}
 
 	public void OpenDoor(){
+			Debug.Log("실행");
 		open =!open;
 		asource.clip = open?openDoor:closeDoor;
 		asource.Play ();

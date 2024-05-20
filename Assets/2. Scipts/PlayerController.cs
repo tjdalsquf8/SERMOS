@@ -12,6 +12,7 @@ using static UnityEngine.UI.Image;
 using UnityEngine.SearchService;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
+using DoorScript;
 
 public class PlayerController : MonoBehaviour
 {
@@ -406,6 +407,34 @@ public class PlayerController : MonoBehaviour
                     //BreakingWoods(); // after delete, when all ready animations
                     _animator.SetBool("isAttack", true);
                 }
+            }
+            else if (hit.collider.CompareTag("MasterDoor"))
+            {
+                DoorScript.Door masterDoor = null;
+                if (masterDoor == null) masterDoor = hit.collider.GetComponent<DoorScript.Door>();
+                if (Input.GetKeyDown(keyCodeInter))
+                {
+                    GameObject firstChild = null;
+                    if (firstChild == null && _rightHand.transform.childCount > 1)
+                    {
+                        firstChild = _rightHand.transform.GetChild(1).gameObject;
+                    }
+                    else
+                    {
+                        UiController.Instance.GridDoorOpenNotPossible();
+                    }
+                    if (firstChild != null && firstChild.CompareTag("key"))
+                    {
+                        ItemPickUp key = firstChild.GetComponent<ItemPickUp>();
+                        if (key.GetKeyKind() == ItemPickUp.ObjKind.master && key.GetIsHolded() == true) // key가 지하실 key이고, 가지고 잇을때,
+                        {
+                            masterDoor.OpenDoor();
+                        }
+                    }
+                   // else if (firstChild == null)
+                }
+                if (!masterDoor.open) UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door);
+                else UiController.Instance.SetTextGUI((int)UiController.ObjectTags.door + 1);
             }
             else // raycast find object but, tag is Untagged
             {
