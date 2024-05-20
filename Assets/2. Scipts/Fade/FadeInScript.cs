@@ -7,7 +7,7 @@ public class FadeInScript : MonoBehaviour
 {
     public Image Panel; // 패널 이미지
     float time = 0f; // 경과 시간을 저장하는 변수
-    float F_time = 5.0f; // 페이드 인 효과가 걸리는 총 시간
+    float F_time = 4.0f; // 페이드 인 효과가 걸리는 총 시간
 
     void Start()
     {
