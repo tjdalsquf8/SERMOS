@@ -22,7 +22,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
-    public bool gameOver = false;
+    [Header("Clear Point")]
+    [SerializeField]
+    private ClearPoint clearPoint;
+
+    private bool gameOver = false;
+    private bool gameClear = false;
 
     private AudioSource _playerAudio;
     private Animator _playerAnim;
@@ -47,13 +52,31 @@ public class GameManager : MonoBehaviour
         {
             _enemyAudio.enabled = true;
         }
+
+        if (gameClear) {
+           // Fade out
+           // -> 끝나면 Scene 전환
+        }else if (gameOver)
+        {
+            clearPoint.enabled = false;
+            // fade out
+            // -> 끝나면 Scene 전환
+        }
     }
 
     public TextMeshProUGUI GetPlayerGUI()
     {
         return _text;
     }
-    
 
-   
+    public void SetGameClear(bool value)
+    {
+        gameClear = value;
+    }
+    public void SetGameOver(bool value)
+    {
+        gameOver = value;
+    }
+
+
 }

@@ -20,6 +20,8 @@ TagManager:
   - Pillow
   - Ax
   - BreakingWood
+  - MasterDoor
+  - forestFloor
   layers:
   - Default
   - TransparentFX
