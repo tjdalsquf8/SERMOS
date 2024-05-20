@@ -19881,7 +19881,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4617641976945934, guid: 92c4497ef2cec364ea7171fccf21ddb1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1386200648}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92c4497ef2cec364ea7171fccf21ddb1, type: 3}
 --- !u!4 &648162431 stripped
@@ -36499,6 +36502,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 780761152700154019, guid: 6924745a509f7b746bc74f3d4548b1aa, type: 3}
   m_PrefabInstance: {fileID: 1065987249}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1066751746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1066751747}
+  - component: {fileID: 1066751748}
+  m_Layer: 0
+  m_Name: ForestFloorEnter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1066751747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066751746}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.327}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1497375434}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1066751748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066751746}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.39}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1069196102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43877,6 +43933,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2172699, y: 0.8085277, z: 0.18994045}
   m_Center: {x: -0.010807037, y: 0.25672257, z: 0.00750494}
+--- !u!1 &1386200647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386200648}
+  - component: {fileID: 1386200649}
+  m_Layer: 0
+  m_Name: WoodFloorEnter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386200648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386200647}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.221, y: 0.586, z: -1.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 648162431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1386200649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386200647}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.27, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1386324979 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1226896354247008, guid: f1ac1674b1044b940a5e6f1e32750350, type: 3}
@@ -46999,7 +47108,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4970741399400872, guid: 26790669cef646944a4d6561a0374e14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1066751747}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26790669cef646944a4d6561a0374e14, type: 3}
 --- !u!4 &1497375434 stripped
@@ -64648,6 +64760,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: forestFloorSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: woodFloorSound.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: e46faab01f8844b7b89e6a50c945ac42, type: 3}
@@ -64655,6 +64771,18 @@ PrefabInstance:
       propertyPath: concreateFloorSound.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: forestFloorSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 569404b5f28ba4342991de68beee9732, type: 3}
+    - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: forestFloorSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e39aa4b94165e413fa5300764da0fc18, type: 3}
+    - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: forestFloorSound.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e7ff2f4c5fbd42d28aee4474c1bd30d, type: 3}
     - target: {fileID: 5833755199638303314, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: concreateFloorSound.Array.data[2]
       value: 
@@ -65386,6 +65514,10 @@ PrefabInstance:
     - target: {fileID: 9060873144710801263, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065434616641195209, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
+      propertyPath: m_Size.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 9127616198176935616, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_Layer

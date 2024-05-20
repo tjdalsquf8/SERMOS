@@ -21,6 +21,7 @@ TagManager:
   - Ax
   - BreakingWood
   - MasterDoor
+  - forestFloor
   layers:
   - Default
   - TransparentFX

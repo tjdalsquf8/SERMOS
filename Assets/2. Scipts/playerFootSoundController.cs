@@ -8,9 +8,13 @@ public class playerFootSoundController : MonoBehaviour
     [SerializeField]
     private  AudioClip[] woodFloorSound;
 
-    [Header("Concreat floor Audio Sound")]
+    [Header("Concreat floor Audio Sounds")]
     [SerializeField]
     private  AudioClip[] concreateFloorSound;
+
+    [Header("Forest floor Audio Sounds")]
+    [SerializeField]
+    private AudioClip[] forestFloorSound;
 
     private AudioClip[] usingSounds;
     private  AudioSource _audio;
@@ -33,6 +37,7 @@ public class playerFootSoundController : MonoBehaviour
     {
         if(other.CompareTag("woodFloor"))  usingSounds = woodFloorSound; 
         else if(other.CompareTag("concreatFloor")) usingSounds = concreateFloorSound; 
+        else if(other.CompareTag("forestFloor")) usingSounds = forestFloorSound; // w twings 03 4 8
     }
 }
 // enter 에서 발소리 리스트를 바꿈, up
