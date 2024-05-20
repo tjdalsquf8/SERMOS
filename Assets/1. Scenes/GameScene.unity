@@ -9312,6 +9312,7 @@ MonoBehaviour:
   text: {fileID: 0}
   _text: {fileID: 1217400990}
   gameOver: 0
+  gameClear: 0
 --- !u!4 &388759172
 Transform:
   m_ObjectHideFlags: 0
@@ -59440,6 +59441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991763890}
   - component: {fileID: 1991763891}
+  - component: {fileID: 1991763892}
   m_Layer: 0
   m_Name: ClearPoint
   m_TagString: Untagged
@@ -59483,6 +59485,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.27, y: 4.5, z: 0.46}
   m_Center: {x: -0.55, y: 1.35, z: 0}
+--- !u!114 &1991763892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991763889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37695d42bd2e2bc4ca9d12284b398411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1997946464
 PrefabInstance:
   m_ObjectHideFlags: 0
