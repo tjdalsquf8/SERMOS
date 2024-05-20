@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
         agent.speed = 0;
         anim.SetBool("isAttack", true);
         PlayerController.Instance.setIsDied(true);
-        GameManager.instance.gameOver = true;
+        GameManager.instance.SetGameOver(true);
         isAttacked = true;
         // 애니매이션 재생 -> 애니매이션 바꾸기
         // 때리는 타이밍에 player 애니매이션 재생

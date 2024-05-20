@@ -41,11 +41,6 @@ public class MovementCharacterController : MonoBehaviour
     public void MoveTo(Vector3 direction)
     {
         direction = transform.rotation * new Vector3(direction.x, 0, direction.z);
-        if (GameManager.instance.gameOver)
-        {
-            direction = Vector3.zero;
-            return;
-        }
         moveForce = new Vector3(direction.x * moveSpeed, moveForce.y, direction.z * moveSpeed);
     }
     public void Jump()

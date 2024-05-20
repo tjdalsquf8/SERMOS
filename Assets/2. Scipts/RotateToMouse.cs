@@ -25,11 +25,6 @@ public class RotateToMouse : MonoBehaviour
     private Camera mainCamera;
     public void UpdateRotate(float mouseX, float mouseY)
     {
-        if (GameManager.instance.gameOver)
-        {
-            mouseX = 0;
-            mouseY = 0;
-        }
         eulerAngleX -= mouseY * rotCamYAxisSpeed;
         eulerAngleY += mouseX * rotCamXAxisSpeed;
         eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX); // 위 아래로 볼수 있는 각도 제한

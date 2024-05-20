@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Clear Point")]
     [SerializeField]
-    private ClearPoint clearPount;
+    private ClearPoint clearPoint;
 
     private bool gameOver = false;
     private bool gameClear = false;
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
            // -> 끝나면 Scene 전환
         }else if (gameOver)
         {
-            clearPount.enabled = false;
+            clearPoint.enabled = false;
             // fade out
             // -> 끝나면 Scene 전환
         }

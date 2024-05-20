@@ -63,7 +63,7 @@ public class Pillow : ItemPickUp
         }
     }
 
-    public void GetIsused()
+  /*  public void GetIsused()
     {
         return;
     }
@@ -72,7 +72,7 @@ public class Pillow : ItemPickUp
     {
         return;
     }
-
+*/
 
     // 배개가 kinetic이라 안던져짐, hold일때 키네틱 해제
 }
