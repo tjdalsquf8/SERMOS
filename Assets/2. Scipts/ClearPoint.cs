@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ClearPoint : MonoBehaviour
 {
-    private bool gameClear = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,7 @@ public class ClearPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            gameClear = true;
+            GameManager.instance.SetGameClear(true);
         }
         // fade ÄÚ·çÆ¾
     }
