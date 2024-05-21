@@ -16582,7 +16582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dc05712622deae148b6ee7beb425d6de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c95e1eeabb62b69479b8f19051e48f96, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20187,7 +20187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &653610067
 Light:
   m_ObjectHideFlags: 0
@@ -64489,31 +64489,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -87.843796
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -29.937317
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2789344833808699158, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 41.669785
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2808256424486370872, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: m_Layer
@@ -65772,9 +65772,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6806291003257168330, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
-      propertyPath: startClip
+      propertyPath: Panel
       value: 
-      objectReference: {fileID: 7400000, guid: 6739b4069f506cf40ba2eb569d7b9352, type: 2}
+      objectReference: {fileID: 785292001}
     - target: {fileID: 6806291003257168330, guid: 9315e5c4fb74ec0429cb9364e29b2f23, type: 3}
       propertyPath: mainCamera
       value: 
