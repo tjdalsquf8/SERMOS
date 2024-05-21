@@ -62,8 +62,7 @@ public class PlayerController : MonoBehaviour
         Instance = GetComponent<PlayerController>();
         _rightHand = InputInspector_rightHand;
     }
-    
-    // Update is called once per frame
+
     void Update()
     {   /*
          RayCasting :
@@ -512,6 +511,13 @@ public class PlayerController : MonoBehaviour
     public void CanRotCameraAndMovePlayer()
     {
         canReceiveInput = true;
+        _animator.SetBool("isGameStart", true);
+    }
+
+    public void PlayerDieFadeOut()
+    {
+        // fade out
+        // LoadScene
     }
 
 }

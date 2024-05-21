@@ -122406,7 +122406,14 @@ AnimationClip:
   - time: 1.1166667
     functionName: HitTheFloorDied
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 963c8bbafdc5dee4e8421459fec097fa, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.5833333
+    functionName: PlayerDieFadeOut
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 963c8bbafdc5dee4e8421459fec097fa, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
