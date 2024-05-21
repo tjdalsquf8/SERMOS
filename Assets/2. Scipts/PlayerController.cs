@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private int  layerMask                   = 1;
     private bool isEquipAx                   = false;
     private bool isDied                      = false;
+    private bool canReceiveInput             = false;
 
     [Header("Breaking woods")]
     [SerializeField]
@@ -71,8 +72,12 @@ public class PlayerController : MonoBehaviour
         Open, Close : door_open, box ( tag )
          */
         RayCasting();
-        RotateUpdate();
-        MoveUpdate();
+
+        if (canReceiveInput)
+        {
+            RotateUpdate();
+            MoveUpdate();
+        }
        
         // JumpUpdate();
         
@@ -502,6 +507,11 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.clip = hitTheFloor;
         audioSource.Play();
+    }
+
+    public void CanRotCameraAndMovePlayer()
+    {
+        canReceiveInput = true;
     }
 
 }

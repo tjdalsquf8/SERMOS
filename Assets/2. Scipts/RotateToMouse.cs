@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class RotateToMouse : MonoBehaviour
 {
-    [SerializeField]
-    private float rotCamXAxisSpeed = 3;
-    [SerializeField]
-    private float rotCamYAxisSpeed = 2;
+    public float rotCamXAxisSpeed = 0;
+    public float rotCamYAxisSpeed = 0;
 
     /*
      y축의 회전방향이 + 일경우 오른쪽으로 회전 > 마우스를 오으로 하면 회전 값 +
