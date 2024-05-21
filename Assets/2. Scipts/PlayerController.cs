@@ -13,6 +13,8 @@ using UnityEngine.SearchService;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using DoorScript;
+using Autodesk.Fbx;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,6 +49,13 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     private Ax _rightHandAxScript;
     //private PlayerAnimatorController animator;
+
+
+    //fade out
+    public Image Panel;
+    float time = 0f;
+    float F_time = 1f;
+
     private void Awake()
     {
         Cursor.visible = false;
@@ -518,6 +527,23 @@ public class PlayerController : MonoBehaviour
     {
         // fade out
         // LoadScene
+        StartCoroutine(FadeFlow());
+
+        IEnumerator FadeFlow()
+        {
+            Panel.gameObject.SetActive(true);
+            Color alpha = Panel.color;
+
+            while (alpha.a < 1f)
+            {
+                time += Time.deltaTime / F_time;
+                alpha.a = Mathf.Lerp(0, 1, time);
+                Panel.color = alpha;
+                yield return null;
+            }
+            yield return null;
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 
 }
