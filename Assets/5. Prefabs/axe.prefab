@@ -167,7 +167,7 @@ MonoBehaviour:
   objKind: 5
   _Ax: {fileID: 3474585680949981353}
   axAnimator: {fileID: 22100000, guid: 8a33ad6acc751d64cb395ba8e47e0aab, type: 2}
-  playerDefaultAnimator: {fileID: 9100000, guid: 3b1b66959b943db44aee93246adc580f, type: 2}
+  playerDefaultAnimator: {fileID: 9100000, guid: 096c4ceb886b54a43b0665580989c27e, type: 2}
 --- !u!64 &8413819197336639358
 MeshCollider:
   m_ObjectHideFlags: 0

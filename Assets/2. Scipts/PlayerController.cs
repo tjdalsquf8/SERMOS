@@ -39,9 +39,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     public GameObject _rightHand { get; private set; }
     public Animator _animator { get ; private set; }
-    [Header("UseRuntimeAnimator")]
-    [SerializeField]
-    private Animator runTimeAnimator;
+
+  
 
     public GameObject _rightHand_ax;
     private KeyCode keyCodeRun               = KeyCode.LeftShift;
@@ -524,7 +523,6 @@ public class PlayerController : MonoBehaviour
     public void CanRotCameraAndMovePlayer()
     {
         canReceiveInput = true;
-        _animator.SetBool("isGameStart", true);
     }
 
     public void PlayerDieFadeOut()

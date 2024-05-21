@@ -135,6 +135,7 @@ public class Enemy : MonoBehaviour
     public void PlayerAnimHit()
     {
         audioSource.clip = hitSound;
+        audioSource.volume = 1.0f;
         audioSource.Play();
         PlayerController.Instance.setAnimIsHited();
     }
