@@ -487,6 +487,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   hitTheFloor: {fileID: 0}
   _rightHand_ax: {fileID: 7682291782304206294}
+  Panel: {fileID: 0}
 --- !u!114 &7971189254071877184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +556,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
